@@ -11,18 +11,21 @@ type OptionsType = {
 type SelectInputProps = {
   name?: string;
   options: OptionsType[];
-  setSelectedOption:
-  (option: OptionsType | null) => void;
-  selectedOption: OptionsType | null
   label?: string;
   hintText?: string;
+  formGroupWidth?: string;
 }
-const SelectInput = ({ options, setSelectedOption, selectedOption, label, hintText }: SelectInputProps) => {
+const SelectInput = ({ options, formGroupWidth, label, hintText }: SelectInputProps) => {
+  const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
   const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string } | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<String | null>(null);
+
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 -mt-5 text-gray-600'
+
   const handleSelect = (value: string, label: string) => {
     //if value is empty, reset the selected option
     if (!value) {
@@ -51,7 +54,6 @@ const SelectInput = ({ options, setSelectedOption, selectedOption, label, hintTe
       setIsOpenOptions(false);
     }, 400);
   };
-  const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 -mt-5 text-gray-600'
 
   useEffect(() => {
     //handle click outside the container
@@ -82,12 +84,16 @@ const SelectInput = ({ options, setSelectedOption, selectedOption, label, hintTe
     //update the sorted list
     setSortedOptions(sortedAlphabetically);
   }, [options, selectedOption]);
-  //TODO:
-  // - delete the selected item from the list when it is selecting another item
 
+  useEffect(() => {
+    // if the options are closed, blur the input to delete all :focus styles
+    if (!isOpenOptions) {
+      inputRef.current?.blur();
+    }
+  }, [isOpenOptions]);
 
   return (
-    <div className='relative px-2 mt-5 bg-white' ref={containerRef} >
+    <div className={`relative  px-2 mt-5 bg-white ${formGroupWidth}`} ref={containerRef} >
       <div className="form--group" onClick={() => setIsOpenOptions(!isOpenOptions)}>
         <input
           type="text"
@@ -96,6 +102,7 @@ const SelectInput = ({ options, setSelectedOption, selectedOption, label, hintTe
           value={selectedOption?.label && selectedOption?.label}
           readOnly
           id="custom-select"
+          ref={inputRef}
         />
         {label && <label className='label label--default' htmlFor="custom-select">{label}</label>}
         <div className={`right-2.5 absolute-center-y`}>
@@ -111,6 +118,7 @@ const SelectInput = ({ options, setSelectedOption, selectedOption, label, hintTe
           {sortedOptions.map((option, index) => {
             const isCurrentItem = option.label === selectedOption?.label && !selectingItem;
             const isHoveredItem = hoveredItemValue === option.value
+
             const isSelectingItem = selectingItem?.value === option.value && selectingItem.isSelecting;
             const selectedItemStyles = isCurrentItem || isSelectingItem
               ? 'options__item--hovered  options__item justify-between'
