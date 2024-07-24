@@ -7,7 +7,7 @@ styles architectura
 ├── tools
 │    for moment we are no using tools
 ├── generic
-│   └── box-sizing.css
+│   └── scrollbar.css
 ├── elements
 │   ├── headings.css
 │   ├── images.css

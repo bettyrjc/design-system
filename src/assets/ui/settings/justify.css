@@ -1,0 +1,21 @@
+.justify-between {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.justify-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.justify-end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-end;
+  gap: 8px;
+}
