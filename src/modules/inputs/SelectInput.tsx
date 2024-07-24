@@ -16,6 +16,7 @@ type SelectInputProps = {
   formGroupWidth?: string;
 }
 const SelectInput = ({ options, formGroupWidth, label, hintText }: SelectInputProps) => {
+  //! this should be in parent component
   const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
