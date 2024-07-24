@@ -1,18 +1,28 @@
 .input {
   padding: 8px 16px 8px 16px;
-  @apply box-border w-full text-sm border rounded-lg cursor-pointer;
+  @apply box-border block w-full text-sm border border-gray-100 rounded-lg outline-none cursor-pointer;
 }
+
 
 .input:hover {
-  box-shadow: 0px 4px 8px 0px #4043443D;
   @apply border-gray-200;
+  box-shadow: 0px 4px 8px 0px #4043443D;
 }
 
-/* focus is not working */
+.input:focus:invalid {
+  box-shadow: none;
+  @apply border border-gray-100;
+}
+
+
 .input:focus {
   @apply border-teal-800;
 }
 
+
 .input--default {
   @apply bg-white border-gray-100 input;
+}
+.input--error {
+  @apply bg-white border-red-500 input;
 }

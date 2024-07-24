@@ -2,10 +2,10 @@
   margin: 0;
   box-shadow: 0px 4px 8px 0px #4043443D;
   height: 128px;
-  @apply w-full p-2 mt-1 overflow-y-auto bg-white border border-transparent rounded-lg;
+  @apply  w-full p-2 mt-1 overflow-y-auto border border-transparent rounded-lg;
 }
 
-.options__option {
+.options__item {
   @apply mb-2 text-sm text-gray-900 bg-white cursor-pointer;
   line-height: 22px;
   height: 30px;
@@ -13,6 +13,14 @@
   opacity: 0px;
 }
 
-.options__option:hover {
+.options__item--icon {
+  @apply w-4 h-4
+}
+ 
+
+.options__item--hovered {
   @apply font-bold bg-transparent transition duration-300 ease-in-out
+}
+.options__item:hover {
+  @apply options__item--hovered
 }

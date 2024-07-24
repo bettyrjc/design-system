@@ -1,0 +1,12 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+p {
+  @apply text-base font-normal leading-4;
+}
+
+
+a {
+  @apply text-base font-normal underline;
+}

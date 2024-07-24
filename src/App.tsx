@@ -4,6 +4,8 @@ import SelectInput from './modules/inputs/SelectInput';
 
 
 function App() {
+  const [selectedOption, setSelectedOption] = React.useState<{ value: string; label: string; } | null>(null);
+
   const options = [
     { value: '6', label: 'Victor Díaz' },
     { value: '2', label: 'Max Mendex' },
@@ -13,13 +15,15 @@ function App() {
     { value: '5', label: 'Sebastian' },
   ];
   return (
-    <div className="w-full min-h-screen px-10 py-10 bg-gray-50">
-      <div className="w-1/2">
-        <SelectInput options={options} />
-      </div>
-      <div className="w-1/3 my-4">
-        <SelectInput options={options} />
-      </div>
+    <div className="w-full min-h-screen bg-white ">
+      <SelectInput
+        options={options}
+        setSelectedOption={setSelectedOption}
+        value={selectedOption}
+        label="Elige un usuario"
+        // hintText="hint text"
+      />
+
     </div>
   );
 }

@@ -1,0 +1,26 @@
+@import './input.css';
+
+.label {
+  padding: 0 5px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  font-weight: 400;
+  line-height: 16px;
+  @apply text-xs top-3 left-2.5 absolute;
+}
+
+/* Raises the label above the input field when the input is focused, 
+   does not have a visible placeholder, or has been autofilled */
+.input:focus+.label,
+.input:not(:placeholder-shown)+.label,
+.input:-webkit-autofill+.label {
+  @apply text-gray-600 text-sm left-2.5 bg-white -top-3; /*TODO: los colores deberian cambiar ???*/
+}
+
+.label--default {
+  @apply text-gray-600 label;
+}
+
+.label--error {
+  @apply text-red-500 label;
+}
