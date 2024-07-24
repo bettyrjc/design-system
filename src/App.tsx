@@ -7,21 +7,22 @@ function App() {
   const [selectedOption, setSelectedOption] = React.useState<{ value: string; label: string; } | null>(null);
 
   const options = [
-    { value: '6', label: 'Victor Díaz' },
-    { value: '2', label: 'Max Mendex' },
-    { value: '1', label: 'Jesús Millán' },
-    { value: '3', label: 'Nicholas Yepes' },
-    { value: '4', label: 'Santiago Aceves' },
-    { value: '5', label: 'Sebastian' },
+    { value: '1', label: 'Victor Díaz' },
+    { value: '', label: 'Max Mendex' },
+    { value: '', label: 'Jesús Millán' },
+    { value: '', label: 'Nicholas Yepes' },
+    { value: '', label: 'Santiago Aceves' },
+    { value: '', label: 'Sebastian' },
+    { value: '', label: 'Axel rose' },
   ];
   return (
     <div className="w-full min-h-screen bg-white ">
       <SelectInput
         options={options}
         setSelectedOption={setSelectedOption}
-        value={selectedOption}
+        selectedOption={selectedOption}
         label="Elige un usuario"
-        // hintText="hint text"
+        hintText="Solo podrás elegir a Victor para continuar"
       />
 
     </div>

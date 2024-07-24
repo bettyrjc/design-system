@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useEffect, useRef, useState } from 'react';
 import ChevronUpIcon from '../../assets/icons/ChevronUpIcon';
 import UserRoundedIcon from '../../assets/icons/UserRoundedIcon';
@@ -8,48 +9,55 @@ type OptionsType = {
   label: string;
 }
 type SelectInputProps = {
+  name?: string;
   options: OptionsType[];
   setSelectedOption:
-  (option: OptionsType) => void;
-  value: OptionsType | null
+  (option: OptionsType | null) => void;
+  selectedOption: OptionsType | null
   label?: string;
   hintText?: string;
 }
-const SelectInput = ({ options, setSelectedOption, value, label, hintText }: SelectInputProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSelecting, setIsSelecting] = useState(false);
+const SelectInput = ({ options, setSelectedOption, selectedOption, label, hintText }: SelectInputProps) => {
+  const [isOpenOptions, setIsOpenOptions] = useState(false);
+  const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
+  const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string } | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<String | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-
   const handleSelect = (value: string, label: string) => {
-    setIsSelecting(true);
+    //if value is empty, reset the selected option
+    if (!value) {
+      setSelectedOption({
+        value: '',
+        label: '',
+      })
+      setIsOpenOptions(false);
+      return;
+    }
+    //set the selecting item to animate the selection
+    setSelectingItem(
+      {
+        isSelecting: true,
+        value,
+      }
+    );
+    //set the selected option
     setSelectedOption({
       value,
       label,
     });
-    setIsSelecting(false);
+    //close the options after the animation
     setTimeout(() => {
-      setIsOpen(false);
+      setSelectingItem(null);
+      setIsOpenOptions(false);
     }, 400);
   };
-
-  const toggleInput = isOpen ? 'rotate-0' : 'rotate-180'
-  // Filters the selected item from the original list
-  const selectedOptionItem = options.find(option => option.label === value?.label);
-  // Sorts the rest of the items alphabetically, excluding the selected item
-  const sortedOptions = options
-    .filter(option => option.label !== value?.label)
-    .sort((a, b) => a.label.localeCompare(b.label));
-  // If there is a selected item, it places it at the beginning of the sorted list
-  if (selectedOptionItem) {
-    sortedOptions.unshift(selectedOptionItem);
-  }
+  const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 -mt-5 text-gray-600'
 
   useEffect(() => {
     //handle click outside the container
     function handleClickOutside(event: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        setIsOpenOptions(false);
       }
     }
     //add listerner on mount
@@ -60,45 +68,61 @@ const SelectInput = ({ options, setSelectedOption, value, label, hintText }: Sel
     };
   }, [containerRef]);
 
+  useEffect(() => {
+    // find the selected item in the original list
+    const currentItemSelected = options.find(option => option.label === selectedOption?.label);
+    // order the rest of the items alphabetically
+    const optionsToSortAlphabetically = options.filter(option => option.label !== selectedOption?.label);
+    // sort the items alphabetically
+    const sortedAlphabetically = optionsToSortAlphabetically.sort((a, b) => a.label.localeCompare(b.label));
+    //if a selected item exists, place it at the beginning of the sorted list
+    if (currentItemSelected) {
+      sortedAlphabetically.unshift(currentItemSelected);
+    }
+    //update the sorted list
+    setSortedOptions(sortedAlphabetically);
+  }, [options, selectedOption]);
+  //TODO:
+  // - delete the selected item from the list when it is selecting another item
+
 
   return (
     <div className='relative px-2 mt-5 bg-white' ref={containerRef} >
-      <div className="form--group">
+      <div className="form--group" onClick={() => setIsOpenOptions(!isOpenOptions)}>
         <input
           type="text"
           className="input input--default"
           placeholder=" "
-          value={value?.label}
+          value={selectedOption?.label && selectedOption?.label}
           readOnly
-          onClick={() => setIsOpen(!isOpen)}
           id="custom-select"
         />
         {label && <label className='label label--default' htmlFor="custom-select">{label}</label>}
-        <div className={`right-2.5 absolute-center-y ${toggleInput}`}>
-          <ChevronUpIcon />
+        <div className={`right-2.5 absolute-center-y`}>
+          <ChevronUpIcon className={`${toggleIconInput} w-4 h-4 cursor-pointer`} />
         </div>
-        {hintText && !isOpen && <span className='mt-1 ml-1 leading-4 text-gray-600 font-xs'>{hintText}</span>}
+        {hintText && !isOpenOptions && <span className='mt-1 ml-1 | text-gray-600 text-xs'>{hintText}</span>}
       </div>
 
-      {isOpen && (
+      {isOpenOptions && (
         <ul
           className=" options scrollbar-hide"
         >
-          {sortedOptions.map((option) => {
-            const isCurrentItem = option.label === value?.label;
-            const isHoveredItem = hoveredItemValue === option.value;
-
-            const selectedItemStyles = isCurrentItem
+          {sortedOptions.map((option, index) => {
+            const isCurrentItem = option.label === selectedOption?.label && !selectingItem;
+            const isHoveredItem = hoveredItemValue === option.value
+            const isSelectingItem = selectingItem?.value === option.value && selectingItem.isSelecting;
+            const selectedItemStyles = isCurrentItem || isSelectingItem
               ? 'options__item--hovered  options__item justify-between'
-              : 'options__item';
-
-            const selectedIconStyles = isCurrentItem
+              : 'options__item justify-between';
+            const selectedIconStyles = isCurrentItem || isSelectingItem
               ? 'options__item--icon text-green-600'
               : 'hidden ';
+
             return (
               <li
-                className={selectedItemStyles} //this could be a separate component
-                key={option.value}
+                className={selectedItemStyles}
+                key={`${option.value}-${index}`}
                 onClick={() => handleSelect(option.value, option.label)}
                 onMouseEnter={() => setHoveredItemValue(option.value)}
                 onMouseLeave={() => setHoveredItemValue(null)}
