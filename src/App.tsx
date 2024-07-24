@@ -4,7 +4,6 @@ import SelectInput from './modules/inputs/SelectInput';
 
 
 function App() {
-  const [selectedOption, setSelectedOption] = React.useState<{ value: string; label: string; } | null>(null);
 
   const options = [
     { value: '1', label: 'Victor Díaz' },
@@ -16,11 +15,9 @@ function App() {
     { value: '', label: 'Axel rose' },
   ];
   return (
-    <div className="w-full min-h-screen bg-white ">
+    <div className="w-full max-h-screen bg-white ">
       <SelectInput
         options={options}
-        setSelectedOption={setSelectedOption}
-        selectedOption={selectedOption}
         label="Elige un usuario"
         hintText="Solo podrás elegir a Victor para continuar"
       />
