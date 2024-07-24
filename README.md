@@ -1,46 +1,58 @@
-# Getting Started with Create React App
+### ITCSS and atom design
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+styles architectura
+├── settings
+│   ├── tailwind imports
+│   └── typography.css
+├── tools
+│    for moment we are no using tools
+├── generic
+│   └── box-sizing.css
+├── elements
+│   ├── headings.css
+│   ├── images.css
+│    └── links.css
+├── objects
+│   ├── container.css
+│   ├── grid.css
+│   └── ui-list.css
+├── components
+│   ├── atoms
+│      ├── button.css
+│      ├── input.css
+│      └── label.css
+│   ├── molecules
+│       ├── card.css
+│       └── form.css
+│   └── organisms
+│       ├── gallery.css
+│       └── header.css
+│
+├── utilities (we name it shared because rule ! utilities)
+│   ├── typography.css
+│   └── error.css
+└── index.scss
 
-## Available Scripts
+# Settings and Tools
 
-In the project directory, you can run:
+The first two levels are oriented towards preprocessors like Sass: defining color variables, typography, as well as mixins and functions. These two levels do not produce any output in our CSS.
 
-### `npm start`
+# Generic
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In this layer, we will put generic styles such as reset or normalize, and the definition of box-sizing. Here we start generating output in our CSS.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Elements
 
-### `npm test`
+We define the styles for HTML elements such as `h1`, `img`, `a`, etc. This is where we start applying our own styles that will change the appearance of our application.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Objects
 
-### `npm run build`
+In this layer, we start creating classes. Until now, we have only worked with element selectors (which have less specificity). Objects are highly reusable classes that add structural patterns without adding decoration, such as `.container` or `.ui-list`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Components
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Components are the bulk of our app. Here we will have all the classes that add styles beyond structure. Since they are more specific classes, they will be less reusable: a class `main-header` will be applied fewer times than `container`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Utilities
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Utility classes like `is-error`, `is-centered`, etc., will always override previous styles when applied. Remember, this is the case where we can use `!important` without making our CSS less maintainable.
