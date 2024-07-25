@@ -24,7 +24,7 @@ const SelectInput = ({ options, formGroupWidth, labelText, hintText, emptyMessag
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
   const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string } | null>(null);
-  const [hoveredItemValue, setHoveredItemValue] = useState<String | null>(null);
+  const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 text-gray-600'
@@ -122,8 +122,8 @@ const SelectInput = ({ options, formGroupWidth, labelText, hintText, emptyMessag
           className=" options scrollbar-hide"
         >
           {sortedOptions.length > 0 ? sortedOptions?.map((option, index) => {
+            const isHoveredItem = hoveredItemValue === index
             const isCurrentItem = option.label === selectedOption?.label && !selectingItem;
-            const isHoveredItem = hoveredItemValue === option.value
             const isSelectingItem = selectingItem?.value === option.value && selectingItem.isSelecting;
             const selectedItemStyles = isCurrentItem || isSelectingItem
               ? 'options__item--hovered  options__item justify-between'
@@ -137,7 +137,7 @@ const SelectInput = ({ options, formGroupWidth, labelText, hintText, emptyMessag
                 className={selectedItemStyles}
                 key={`${option.value}-${index}`}
                 onClick={() => handleSelect(option.value, option.label)}
-                onMouseEnter={() => setHoveredItemValue(option.value)}
+                onMouseEnter={() => setHoveredItemValue(index)}
                 onMouseLeave={() => setHoveredItemValue(null)}
               >
                 <div className='justify-start '>
