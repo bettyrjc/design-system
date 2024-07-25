@@ -18,7 +18,6 @@ function App() {
     <div className="w-full max-h-screen bg-white ">
       <SelectInput
         options={options}
-        label="Elige un usuario"
         hintText="Solo podrás elegir a Victor para continuar"
       />
 

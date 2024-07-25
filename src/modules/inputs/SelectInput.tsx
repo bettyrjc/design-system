@@ -11,21 +11,23 @@ type OptionsType = {
 type SelectInputProps = {
   name?: string;
   options: OptionsType[];
-  label?: string;
+  labelText?: string;
   hintText?: string;
   formGroupWidth?: string;
+  emptyMessage?: string;
+  isDisabled?: boolean;
+  isError?: boolean;
 }
-const SelectInput = ({ options, formGroupWidth, label, hintText }: SelectInputProps) => {
+const SelectInput = ({ options, formGroupWidth, labelText, hintText, emptyMessage = "No hay opciones disponibles", isDisabled = false, isError = false }: SelectInputProps) => {
   //! this should be in parent component
   const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
   const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string } | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<String | null>(null);
-
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 -mt-5 text-gray-600'
+  const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 text-gray-600'
 
   const handleSelect = (value: string, label: string) => {
     //if value is empty, reset the selected option
@@ -93,30 +95,33 @@ const SelectInput = ({ options, formGroupWidth, label, hintText }: SelectInputPr
     }
   }, [isOpenOptions]);
 
+  const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
+  const labelStyles = isError ? ' label--error' : ' label--default';
+  const hintStyles = isError ? 'text-red-500' : 'text-gray-600';
   return (
     <div className={`relative  px-2 mt-5 bg-white ${formGroupWidth}`} ref={containerRef} >
       <div className="form--group" onClick={() => setIsOpenOptions(!isOpenOptions)}>
         <input
           type="text"
-          className="input input--default"
+          className={`input ${inputStyles}`}
           placeholder=" "
           value={selectedOption?.label && selectedOption?.label}
           readOnly
           id="custom-select"
           ref={inputRef}
+          disabled={isDisabled}
         />
-        {label && <label className='label label--default' htmlFor="custom-select">{label}</label>}
+        {labelText && <label className={`label ${labelStyles}`} htmlFor="custom-select">{labelText}</label>}
         <div className={`right-2.5 absolute-center-y`}>
           <ChevronUpIcon className={`${toggleIconInput} w-4 h-4 cursor-pointer`} />
         </div>
-        {hintText && !isOpenOptions && <span className='mt-1 ml-1 | text-gray-600 text-xs'>{hintText}</span>}
       </div>
-
+      {hintText && !isOpenOptions && <span className={`mt-1 ml-1 | ${hintStyles} text-xs`}>{hintText}</span>}
       {isOpenOptions && (
         <ul
           className=" options scrollbar-hide"
         >
-          {sortedOptions.map((option, index) => {
+          {sortedOptions.length > 0 ? sortedOptions?.map((option, index) => {
             const isCurrentItem = option.label === selectedOption?.label && !selectingItem;
             const isHoveredItem = hoveredItemValue === option.value
 
@@ -149,7 +154,7 @@ const SelectInput = ({ options, formGroupWidth, label, hintText }: SelectInputPr
                 <CheckIncon className={selectedIconStyles} />
               </li>
             )
-          })}
+          }) : <li className='text-gray-300 flex-centered'>{emptyMessage}</li>}
         </ul>
       )}
     </div>

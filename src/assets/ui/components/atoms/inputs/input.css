@@ -1,6 +1,6 @@
 .input {
   padding: 8px 16px 8px 16px;
-  @apply box-border block w-full text-sm border rounded-lg outline-none cursor-pointer;
+  @apply box-border block w-full text-sm border rounded-lg outline-none;
 }
 
 
@@ -21,8 +21,17 @@
 
 
 .input--default {
-  @apply bg-white border-gray-100 input;
+  @apply bg-white border-gray-100 cursor-pointer input;
 }
+
 .input--error {
-  @apply bg-white border-red-500 input;
+  @apply bg-white border-red-500 cursor-pointer input;
+}
+
+.input--disabled {
+  @apply border-gray-200 cursor-not-allowed input bg-gray-50;
+}
+
+.input--disabled:hover {
+  box-shadow: none;
 }
