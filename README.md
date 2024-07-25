@@ -95,7 +95,9 @@ if you make a change:
 
 with it,this is uploading to vercel
 ## visit link
-[Link vercel] ('https://design-system-bxr7fmtnn-betty-jimenezs-projects.vercel.app/?path=/story/example-selectinput--default')
+[Link vercel] ('https://design-system-git-main-betty-jimenezs-projects.vercel.app/')
  is 
 # improve (También agrega las mejoras que se pueden hacer pero ya no pudiste.)
-- scroll to up when is already selected one to see its new position
+- scroll smooth to up when is already selected one to see its new position
+-separate input in another component
+- state should be in parent element not in child
