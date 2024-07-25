@@ -1,6 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import React, { useState } from 'react';
+import { Meta, StoryObj } from '@storybook/react';
 import SelectInput from "./SelectInput";
 // import { fn } from "@storybook/test";
+
+
 
 const meta: Meta<typeof SelectInput> = {
   title: "Example/SelectInput",
@@ -10,6 +13,9 @@ const meta: Meta<typeof SelectInput> = {
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+
+
 
 export const Default: Story = {
   args: {
@@ -25,6 +31,12 @@ export const Default: Story = {
     labelText: "Elige un usuario",
     hintText: "Solo podrás elegir a Victor para continuar",
   },
+  render: (args) => {
+    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    return (
+      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+    );
+  },
 };
 
 export const customParentWidth: Story = {
@@ -36,7 +48,13 @@ export const customParentWidth: Story = {
     ],
     labelText: "Elige un usuario",
     hintText: "Solo podrás elegir a Victor para continuar",
-    formGroupWidth: "w-1/2",
+    formGroupWidth: "w-full lg:w-1/2",
+  },
+  render: (args) => {
+    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    return (
+      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+    );
   },
 };
 
@@ -47,6 +65,12 @@ export const CustomEmptyMessage: Story = {
     hintText: "Solo podrás elegir a Victor para continuar",
     emptyMessage: "No hay usuarios disponibles",
   },
+  render: (args) => {
+    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    return (
+      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+    );
+  },
 };
 
 export const Disabled: Story = {
@@ -54,6 +78,12 @@ export const Disabled: Story = {
     options: [],
     labelText: "Elige un usuario",
     isDisabled: true,
+  },
+  render: (args) => {
+    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    return (
+      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+    );
   },
 };
 export const Error: Story = {
@@ -67,5 +97,10 @@ export const Error: Story = {
     isError: true,
     hintText: "Solo podrás elegir a Victor para continuar",
   },
+  render: (args) => {
+    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    return (
+      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+    );
+  },
 };
-

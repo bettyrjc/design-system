@@ -17,10 +17,11 @@ type SelectInputProps = {
   emptyMessage?: string;
   isDisabled?: boolean;
   isError?: boolean;
+
+  selectedOption: { value: string; label: string; } | null;
+  setSelectedOption: (value: { value: string; label: string; }) => void;
 }
-const SelectInput = ({ options, formGroupWidth, labelText, hintText, emptyMessage = "No hay opciones disponibles", isDisabled = false, isError = false }: SelectInputProps) => {
-  //! this should be in parent component
-  const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+const SelectInput = ({ options, formGroupWidth, selectedOption,  setSelectedOption, labelText, hintText, emptyMessage = "No hay opciones disponibles", isDisabled = false, isError = false }: SelectInputProps) => {
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
   const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string } | null>(null);
