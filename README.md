@@ -1,4 +1,6 @@
-### ITCSS and atom design
+# STRUCTURE CSS
+
+## ITCSS and atom design
 
 styles architectura
 ├── settings
@@ -9,50 +11,79 @@ styles architectura
 ├── generic
 │   └── scrollbar.css
 ├── elements
-│   ├── headings.css
-│   ├── images.css
-│    └── links.css
+│    └── index.css - tags
 ├── objects
-│   ├── container.css
-│   ├── grid.css
-│   └── ui-list.css
+│   ├── flex.css
+│   ├── positions.css
+│   └── index.css
 ├── components
 │   ├── atoms
-│      ├── button.css
-│      ├── input.css
-│      └── label.css
+│  ├── button.css
+│   ├── input.css
+│    └── label.css
 │   ├── molecules
-│       ├── card.css
-│       └── form.css
+│  ├── card.css
+│    └── form.css
 │   └── organisms
-│       ├── gallery.css
-│       └── header.css
+│  ├── gallery.css
+│    └── header.css
 │
 ├── utilities (we name it shared because rule ! utilities)
 │   ├── typography.css
 │   └── error.css
 └── index.scss
 
-# Settings and Tools
+## Settings and Tools
 
 The first two levels are oriented towards preprocessors like Sass: defining color variables, typography, as well as mixins and functions. These two levels do not produce any output in our CSS.
 
-# Generic
+## Generic
 
 In this layer, we will put generic styles such as reset or normalize, and the definition of box-sizing. Here we start generating output in our CSS.
 
-# Elements
+## Elements
 
 We define the styles for HTML elements such as `h1`, `img`, `a`, etc. This is where we start applying our own styles that will change the appearance of our application.
 
-# Objects
+## Objects
 
 In this layer, we start creating classes. Until now, we have only worked with element selectors (which have less specificity). Objects are highly reusable classes that add structural patterns without adding decoration, such as `.container` or `.ui-list`.
 
-# Components
+## Components
 
 Components are the bulk of our app. Here we will have all the classes that add styles beyond structure. Since they are more specific classes, they will be less reusable: a class `main-header` will be applied fewer times than `container`.
 
-# Utilities
+## Utilities
 
 Utility classes like `is-error`, `is-centered`, etc., will always override previous styles when applied. Remember, this is the case where we can use `!important` without making our CSS less maintainable.
+
+## CLASS IN COMPONENTS WILL BE WRITE WITH BEM ARCHITECTURE
+
+The class in components will write with BEM to identify block, element and modifier
+
+- architecture elements block and modifier would be separated with guion (--)
+  example: block__element--modifier
+
+# STRUCTURE IN COMPONENTS
+├── assets static elements and css
+│   ├── icons - svg icons
+│   └── ui - css styles
+│ 
+├── modules (organized for item)
+    ├── buttons
+    └── inputs
+-------------------------------------------------------------
+Documenta aquellas cosas que te gustaron, y no te gustaron de tu proyecto.
+Queremos entender porque tomaste las decisiones que tomaste.
+También agrega las mejoras que se pueden hacer pero ya no pudiste.
+------------------------------------------------------------------------
+
+# how to run project
+<!-- Local -->
+- npm run start
+- npm run storybook
+
+
+# how deploy project to vercel
+
+# 
