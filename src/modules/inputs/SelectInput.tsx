@@ -124,7 +124,6 @@ const SelectInput = ({ options, formGroupWidth, labelText, hintText, emptyMessag
           {sortedOptions.length > 0 ? sortedOptions?.map((option, index) => {
             const isCurrentItem = option.label === selectedOption?.label && !selectingItem;
             const isHoveredItem = hoveredItemValue === option.value
-
             const isSelectingItem = selectingItem?.value === option.value && selectingItem.isSelecting;
             const selectedItemStyles = isCurrentItem || isSelectingItem
               ? 'options__item--hovered  options__item justify-between'

@@ -62,28 +62,40 @@ Utility classes like `is-error`, `is-centered`, etc., will always override previ
 The class in components will write with BEM to identify block, element and modifier
 
 - architecture elements block and modifier would be separated with guion (--)
-  example: block__element--modifier
+  example: block\_\_element--modifier
 
 # STRUCTURE IN COMPONENTS
+
 ├── assets static elements and css
 │   ├── icons - svg icons
 │   └── ui - css styles
 │ 
 ├── modules (organized for item)
-    ├── buttons
-    └── inputs
--------------------------------------------------------------
+├── buttons
+└── inputs
+
+---
+
 Documenta aquellas cosas que te gustaron, y no te gustaron de tu proyecto.
 Queremos entender porque tomaste las decisiones que tomaste.
-También agrega las mejoras que se pueden hacer pero ya no pudiste.
-------------------------------------------------------------------------
+
+---
 
 # how to run project
-<!-- Local -->
 - npm run start
 - npm run storybook
 
-
 # how deploy project to vercel
+if you make a change:
 
-# 
+- npm run build-storybook
+- git add file
+- git commit -m ''
+- git push origin branch
+
+with it,this is uploading to vercel
+## visit link
+[Link vercel] ('https://design-system-bxr7fmtnn-betty-jimenezs-projects.vercel.app/?path=/story/example-selectinput--default')
+ is 
+# improve (También agrega las mejoras que se pueden hacer pero ya no pudiste.)
+- scroll to up when is already selected one to see its new position
