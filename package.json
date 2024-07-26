@@ -1,6 +1,7 @@
 {
   "name": "musa-design-system",
-  "version": "0.0.5",
+  "author": "Betty",
+  "version": "0.0.6",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -68,6 +69,12 @@
     "react"
   ],
   "files": [
-    "dist/**/*"
-  ]
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  }
 }
