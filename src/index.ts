@@ -1,1 +1,2 @@
-export { default as DropdownSelector } from './modules/dropdown/DropdownSelector';
+import DropdownSelector from './modules/dropdown/DropdownSelector';
+export { DropdownSelector };
