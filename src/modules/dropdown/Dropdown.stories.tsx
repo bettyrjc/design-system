@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ComponentProps, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import DropdownSelector, { OptionsType } from "./DropdownSelector";
 import { userDataMock } from '../../assets/mocks/userDataMock';
@@ -13,18 +13,20 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const renderDropdown = (args: ComponentProps<typeof DropdownSelector>) => {
+  const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
+  return (
+    <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+  );
+};
+
 export const Default: Story = {
   args: {
     options: userDataMock,
     labelText: "Elige un usuario",
     hintText: "Solo podrás elegir a Victor para continuar",
   },
-  render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
-    return (
-      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
-    );
-  },
+  render: renderDropdown,
 };
 
 export const CustomParentWidth: Story = {
@@ -34,12 +36,7 @@ export const CustomParentWidth: Story = {
     hintText: "Solo podrás elegir a Victor para continuar",
     formGroupWidth: "w-full lg:w-1/2",
   },
-  render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
-    return (
-      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
-    );
-  },
+  render:renderDropdown,
 };
 
 export const CustomEmptyMessage: Story = {
@@ -49,12 +46,7 @@ export const CustomEmptyMessage: Story = {
     hintText: "Solo podrás elegir a Victor para continuar",
     emptyMessage: "No hay usuarios disponibles",
   },
-  render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
-    return (
-      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
-    );
-  },
+  render: renderDropdown,
 };
 
 export const Disabled: Story = {
@@ -63,24 +55,14 @@ export const Disabled: Story = {
     labelText: "Elige un usuario",
     isDisabled: true,
   },
-  render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
-    return (
-      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
-    );
-  },
+  render: renderDropdown,
 };
 export const Error: Story = {
   args: {
     options: userDataMock,
     labelText: "Elige un usuario",
-    isError: true,
     hintText: "Solo podrás elegir a Victor para continuar",
+    isError: true,
   },
-  render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
-    return (
-      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
-    );
-  },
+  render: renderDropdown,
 };

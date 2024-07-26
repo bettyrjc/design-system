@@ -5,7 +5,7 @@
 @import 'elements/index.css'; /* Elements: add style to tags h1,p1 body */
 @import 'objects/index.css'; /* only add structure*/
 
-@import 'components/atoms/index.css';
-@import 'components/molecules/index.css';
+@import 'components/atoms/index.css'; /* only add style to tags like button, input, etc */
+@import 'components/molecules/index.css'; /* only add style to tags like form, card, etc */
 
-@import 'shared/index.css'; /* shared styles */
+@import 'shared/index.css'; /* shared styles like error color*/

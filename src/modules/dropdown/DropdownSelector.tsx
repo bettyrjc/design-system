@@ -37,29 +37,20 @@ const DropdownSelector = ({
   const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  
+
   const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 text-gray-600'
   const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
   const labelStyles = isError ? ' label--error' : ' label--default';
   const hintStyles = isError ? 'text-error' : 'text-gray-600';
-  const handleSelect = (value: string | null, label: string) => {
-    //set the selecting item to animate the selection
-    setSelectingItem(
-      {
-        isSelecting: true,
-        value,
-      }
-    );
-    //set the selected option
-    setSelectedOption({
-      value,
-      label,
-    });
-    //close the options after the animation
+
+  const handleSelect = (value: string, label: string) => {
+    setSelectingItem({ isSelecting: true, value });  //set the selecting item to animate the selection
+    setSelectedOption({ value, label }); //set the selected option
+    //close the options after the 400 ms
     setTimeout(() => {
       setSelectingItem(null);
-      setIsOpenOptions(false);
       setHoveredItemValue(null);
+      setIsOpenOptions(false);
     }, 400);
   };
 
@@ -120,9 +111,7 @@ const DropdownSelector = ({
       </div>
       {hintText && !isOpenOptions && <span className={`mt-1 ml-1 | ${hintStyles} text-xs`}>{hintText}</span>}
       {isOpenOptions && (
-        <ul
-          className="options scrollbar-hide"
-        >
+        <ul className="options scrollbar-hide">
           {sortedOptions.length > 0 ? sortedOptions?.map((option, index) => {
             const optionValue = option.value
             const optionLabel = option.label
@@ -144,14 +133,9 @@ const DropdownSelector = ({
                 onMouseEnter={() => setHoveredItemValue(index)}
                 onMouseLeave={() => setHoveredItemValue(null)}
               >
-                <div className='justify-start '>
-                  <UserRoundedIcon
-                    className="w-4 h-4"
-                    strokeWidth={isHoveringItem}
-                  />
-                  <span>
-                    {option.label}
-                  </span>
+                <div className='justify-start'>
+                  <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem}/>
+                  <span>{optionLabel}</span>
                 </div>
 
                 <CheckIncon className={checkIconStyles} />
