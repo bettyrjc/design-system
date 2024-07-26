@@ -8,7 +8,7 @@ export type OptionsType = {
   value: string | null;
   label: string;
 }
-type SelectInputProps = {
+type DropdownSelectorProps = {
   name?: string;
   options: OptionsType[];
   labelText?: string;
@@ -19,9 +19,9 @@ type SelectInputProps = {
   isError?: boolean;
 
   selectedOption: OptionsType | null;
-  setSelectedOption: (value: OptionsType) => void;
+  setSelectedOption: (value: OptionsType | null) => void;
 }
-const SelectInput = ({
+const DropdownSelector = ({
   options,
   formGroupWidth,
   selectedOption,
@@ -30,28 +30,19 @@ const SelectInput = ({
   hintText,
   emptyMessage = "No hay opciones disponibles",
   isDisabled = false,
-  isError = false }: SelectInputProps) => {
+  isError = false }: DropdownSelectorProps) => {
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
   const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string | null } | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  
   const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 text-gray-600'
   const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
   const labelStyles = isError ? ' label--error' : ' label--default';
-  const hintStyles = isError ? 'text-red-500' : 'text-gray-600';
+  const hintStyles = isError ? 'text-error' : 'text-gray-600';
   const handleSelect = (value: string | null, label: string) => {
-    //if value is empty, reset the selected option
-    if (!value) {
-      setSelectedOption({
-        value: '',
-        label: '',
-      })
-      setIsOpenOptions(false);
-      setHoveredItemValue(null);
-      return;
-    }
     //set the selecting item to animate the selection
     setSelectingItem(
       {
@@ -110,7 +101,7 @@ const SelectInput = ({
   }, [isOpenOptions]);
 
   return (
-    <div className={`relative  px-2 mt-5 bg-white ${formGroupWidth}`} ref={containerRef} >
+    <div className={`relative px-2 mt-5 bg-white ${formGroupWidth}`} ref={containerRef} >
       <div className="form--group" onClick={() => setIsOpenOptions(!isOpenOptions)}>
         <input
           type="text"
@@ -130,30 +121,32 @@ const SelectInput = ({
       {hintText && !isOpenOptions && <span className={`mt-1 ml-1 | ${hintStyles} text-xs`}>{hintText}</span>}
       {isOpenOptions && (
         <ul
-          className=" options scrollbar-hide"
+          className="options scrollbar-hide"
         >
           {sortedOptions.length > 0 ? sortedOptions?.map((option, index) => {
+            const optionValue = option.value
+            const optionLabel = option.label
             const isHoveredItem = hoveredItemValue === index //validate if the item by index is hover
-            const isCurrentItem = option.value === selectedOption?.value && !selectingItem; //selected item by value 
-            const isSelectingItem = selectingItem?.value === option.value && selectingItem.isSelecting; // selecting item, the current action of the user is doing
+            const isCurrentItem = optionValue === selectedOption?.value && !selectingItem; //selected item by value 
+            const isSelectingItem = selectingItem?.value === optionValue && selectingItem.isSelecting; // selecting item, the current action of the user is doing
             const isHoveringItem = isHoveredItem || isCurrentItem ? '3' : '2' //stroke width of the icon is the item is hovered or selected
             const selectedItemStyles = isCurrentItem || isSelectingItem
-              ? 'options__item--hovered  options__item justify-between'
-              : 'options__item justify-between';
-            const selectedIconStyles = isCurrentItem || isSelectingItem
-              ? 'options__item--icon text-green-600'
+              ? `options__item--hovered  options__item justify-between ${option?.value && 'cursor-pointer'}`
+              : `options__item justify-between ${option?.value && 'cursor-pointer'}`;
+            const checkIconStyles = isCurrentItem || isSelectingItem // only show when item have been selected
+              ? 'w-4 h-4 text-green-600'
               : 'hidden ';
             return (
               <li
                 className={selectedItemStyles}
-                key={`${option.value}-${index}`}
-                onClick={() => handleSelect(option.value, option.label)}
+                key={`${optionValue}-${index}`}
+                onClick={optionValue ? () => handleSelect(optionValue, optionLabel) : undefined} //handle the selection of the item and option value is not null
                 onMouseEnter={() => setHoveredItemValue(index)}
                 onMouseLeave={() => setHoveredItemValue(null)}
               >
                 <div className='justify-start '>
                   <UserRoundedIcon
-                    className="options__item--icon"
+                    className="w-4 h-4"
                     strokeWidth={isHoveringItem}
                   />
                   <span>
@@ -161,7 +154,7 @@ const SelectInput = ({
                   </span>
                 </div>
 
-                <CheckIncon className={selectedIconStyles} />
+                <CheckIncon className={checkIconStyles} />
               </li>
             )
           }) : <li className='text-gray-300 flex-centered'>{emptyMessage}</li>}
@@ -171,5 +164,5 @@ const SelectInput = ({
   );
 };
 
-export default SelectInput;
+export default DropdownSelector;
 

@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import SelectInput, { OptionsType } from "./SelectInput";
-import { userDataMock } from '../../assets/mocks/data';
+import DropdownSelector, { OptionsType } from "./DropdownSelector";
+import { userDataMock } from '../../assets/mocks/userDataMock';
 // import { fn } from "@storybook/test";
 
-
-
-const meta: Meta<typeof SelectInput> = {
-  title: "SelectInput",
-  component: SelectInput,
+const meta: Meta<typeof DropdownSelector> = {
+  title: "DropdownSelector",
+  component: DropdownSelector,
 };
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-
-
-
 
 export const Default: Story = {
   args: {
@@ -27,7 +22,7 @@ export const Default: Story = {
   render: (args) => {
     const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
-      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
   },
 };
@@ -42,7 +37,7 @@ export const CustomParentWidth: Story = {
   render: (args) => {
     const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
-      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
   },
 };
@@ -57,7 +52,7 @@ export const CustomEmptyMessage: Story = {
   render: (args) => {
     const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
-      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
   },
 };
@@ -71,7 +66,7 @@ export const Disabled: Story = {
   render: (args) => {
     const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
-      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
   },
 };
@@ -85,7 +80,7 @@ export const Error: Story = {
   render: (args) => {
     const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
-      <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+      <DropdownSelector {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
   },
 };

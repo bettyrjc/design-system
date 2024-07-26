@@ -2,7 +2,7 @@
 
 ## ITCSS and atom design
 
-styles architectura
+styles architectura how should be
 ├── settings
 │   ├── tailwind imports
 │   └── typography.css
@@ -18,18 +18,17 @@ styles architectura
 │   └── index.css
 ├── components
 │   ├── atoms
-│  ├── button.css
-│   ├── input.css
+│    ├── button.css
+│    ├── input.css
 │    └── label.css
 │   ├── molecules
-│  ├── card.css
-│    └── form.css
+│     ├── card.css
+│     └── form.css
 │   └── organisms
-│  ├── gallery.css
-│    └── header.css
+│     ├── gallery.css
+│     └── header.css
 │
 ├── utilities (we name it shared because rule ! utilities)
-│   ├── typography.css
 │   └── error.css
 └── index.scss
 
@@ -68,19 +67,20 @@ The class in components will write with BEM to identify block, element and modif
 
 ├── assets static elements and css
 │   ├── icons - svg icons
+│   ├── mocks - static data
 │   └── ui - css styles
 │ 
-├── modules (organized for item)
-├── buttons
-└── inputs
-
-
+└── modules (organized for item)
+    ├── Dropdown - fields to  recolects user info
+    └── buttons
 
 # how to run project
+
 - npm run start
 - npm run storybook
 
 # how deploy project to vercel
+
 if you make a change:
 
 - npm run build-storybook
@@ -89,20 +89,32 @@ if you make a change:
 - git push origin branch
 
 ## visit link
+
 [Link vercel] ('https://design-system-git-main-betty-jimenezs-projects.vercel.app/')
 
 # improve (También agrega las mejoras que se pueden hacer pero ya no pudiste.)
+
 - scroll smooth to up when is already selected one to see its new position
 - state should be in parent element not in child ✅
-- if it selection someone does not have value, should no change strokeWidth
-- only must have a selected input not more than one
+- if it selection someone does not have value, should no change strokeWidth ✅
+- only must have a selected input not more than one ✅
+- when I am selecting must be put the check
+- test usability
+- cases
+  - Do not have info
+  - with options
+  - only select victor
+  - has a hint
+  - put a error and disabled
+- check all names in class
 
---- 
+---
+
 # Comments
 
 Documenta aquellas cosas que te gustaron, y no te gustaron de tu proyecto.
 Queremos entender porque tomaste las decisiones que tomaste.
 
 <!-- Not like -->
--> en el figma los colores se veian mas claros que de los que realmente decia cuando se le daba click  para inspeccionar (no en el prototipo).
----
+
+## -> en el figma los colores se veian mas claros que de los que realmente decia cuando se le daba click para inspeccionar (no en el prototipo).

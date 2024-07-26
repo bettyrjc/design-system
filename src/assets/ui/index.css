@@ -7,3 +7,5 @@
 
 @import 'components/atoms/index.css';
 @import 'components/molecules/index.css';
+
+@import 'shared/index.css'; /* shared styles */
