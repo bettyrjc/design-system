@@ -1,11 +1,12 @@
 {
   "name": "musa-design-system",
   "author": "Betty",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": false,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
+    "@storybook/preset-create-react-app": "^8.2.6",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -54,7 +55,6 @@
     "@storybook/addon-links": "^8.2.6",
     "@storybook/addon-onboarding": "^8.2.6",
     "@storybook/blocks": "^8.2.6",
-    "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/react": "^8.2.6",
     "@storybook/react-webpack5": "^8.2.6",
     "@storybook/test": "^8.2.6",
