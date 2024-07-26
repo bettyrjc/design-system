@@ -1,14 +1,13 @@
 import React from 'react';
 import './assets/ui/index.css';
-import SelectInput, { OptionsType } from './modules/dropdown/DropdownSelector';
+import DropdownSelector, { OptionsType } from './modules/dropdown/DropdownSelector';
 import { userDataMock } from './assets/mocks/userDataMock';
-
 
 function App() {
   const [selectedOption, setSelectedOption] = React.useState<OptionsType | null>(null);
   return (
     <div className="container">
-      <SelectInput
+      <DropdownSelector
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
         options={userDataMock}
