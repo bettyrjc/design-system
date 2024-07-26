@@ -17,7 +17,6 @@ type DropdownSelectorProps = {
   emptyMessage?: string;
   isDisabled?: boolean;
   isError?: boolean;
-
   selectedOption: OptionsType | null;
   setSelectedOption: (value: OptionsType | null) => void;
 }
@@ -31,14 +30,15 @@ const DropdownSelector = ({
   emptyMessage = "No hay opciones disponibles",
   isDisabled = false,
   isError = false }: DropdownSelectorProps) => {
-  const [isOpenOptions, setIsOpenOptions] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
   const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string | null } | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
+  const [defaultValue, setDefaultValue] = useState<OptionsType | null>( null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 text-gray-600'
+  const toggleIconInput = isDropdownOpen ? 'rotate-0' : 'rotate-180 text-gray-600'
   const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
   const labelStyles = isError ? ' label--error' : ' label--default';
   const hintStyles = isError ? 'text-error' : 'text-gray-600';
@@ -50,17 +50,30 @@ const DropdownSelector = ({
     setTimeout(() => {
       setSelectingItem(null);
       setHoveredItemValue(null);
-      setIsOpenOptions(false);
+      setIsDropdownOpen(false);
+      setDefaultValue({ value, label });
     }, 400);
   };
 
-  useEffect(() => {
-    //handle click outside the container
-    function handleClickOutside(event: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpenOptions(false);
+  // Sort the options alphabetically and handle the selected option
+  const sortOptions = () => {
+    let sortedList = [...options].sort((a, b) => a.label.localeCompare(b.label));
+    if (defaultValue) {
+      const index = sortedList.findIndex(option => option.label === defaultValue.label);
+      if (index > -1) {
+        const [selectedItem] = sortedList.splice(index, 1);
+        sortedList.unshift(selectedItem);
       }
     }
+    setSortedOptions(sortedList);
+  };
+  //handle click outside the container
+  const handleClickOutside = (event: MouseEvent) => {
+    if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
+    }
+  }
+  useEffect(() => {
     //add listerner on mount
     document.addEventListener('mousedown', handleClickOutside);
     //clean listerner on unmount
@@ -70,30 +83,23 @@ const DropdownSelector = ({
   }, [containerRef]);
 
   useEffect(() => {
-    // find the selected item in the original list
-    const currentItemSelected = options.find(option => option.label === selectedOption?.label);
-    // order the rest of the items alphabetically
-    const optionsToSortAlphabetically = options.filter(option => option.label !== selectedOption?.label);
-    // sort the items alphabetically
-    const sortedAlphabetically = optionsToSortAlphabetically.sort((a, b) => a.label.localeCompare(b.label));
-    //if a selected item exists, place it at the beginning of the sorted list
-    if (currentItemSelected) {
-      sortedAlphabetically.unshift(currentItemSelected);
+    if (isDropdownOpen && defaultValue) {
+      sortOptions(); //only puts the selected item at the top of the list when the dropdown is open again
+    } else {
+      setSortedOptions([...options].sort((a, b) => a.label.localeCompare(b.label)));
     }
-    //update the sorted list
-    setSortedOptions(sortedAlphabetically);
-  }, [options, selectedOption]);
+  }, [options, isDropdownOpen, defaultValue]);
 
   useEffect(() => {
     // if the options are closed, blur the input to delete all :focus styles
-    if (!isOpenOptions) {
+    if (!isDropdownOpen) {
       inputRef.current?.blur();
     }
-  }, [isOpenOptions]);
+  }, [isDropdownOpen]);
 
   return (
     <div className={`relative px-2 mt-5 bg-white ${formGroupWidth}`} ref={containerRef} >
-      <div className="form--group" onClick={() => setIsOpenOptions(!isOpenOptions)}>
+      <div className="form--group" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
         <input
           type="text"
           className={`input ${inputStyles}`}
@@ -109,8 +115,8 @@ const DropdownSelector = ({
           <ChevronUpIcon className={`${toggleIconInput} w-4 h-4 cursor-pointer`} />
         </div>
       </div>
-      {hintText && !isOpenOptions && <span className={`mt-1 ml-1 | ${hintStyles} text-xs`}>{hintText}</span>}
-      {isOpenOptions && (
+      {hintText && !isDropdownOpen && <span className={`mt-1 ml-1 | ${hintStyles} text-xs`}>{hintText}</span>}
+      {isDropdownOpen && (
         <ul className="options scrollbar-hide">
           {sortedOptions.length > 0 ? sortedOptions?.map((option, index) => {
             const optionValue = option.value
@@ -134,7 +140,7 @@ const DropdownSelector = ({
                 onMouseLeave={() => setHoveredItemValue(null)}
               >
                 <div className='justify-start'>
-                  <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem}/>
+                  <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem} />
                   <span>{optionLabel}</span>
                 </div>
 
