@@ -107,12 +107,7 @@ The class in components will write with BEM to identify block, element and modif
   - only select victor
   - has a hint
   - put a error and disabled
-- check all names in class
-
-<!-- I don't do -->
-
-- when user is not selecting a user in figma highlighted the correct/only selection but I think it is figma, because when there are more than one, which would highlighted?
-
+ - add layout in css only field because en the doc is mentioned
 ---
 
 # Comments
@@ -120,7 +115,16 @@ The class in components will write with BEM to identify block, element and modif
 Documenta aquellas cosas que te gustaron, y .
 Queremos entender porque tomaste las decisiones que tomaste.
 
+<!-- I don't do -->
+Que me gusto
+## Feedback
 
-### no te gustaron de tu proyecto
- en el figma los colores se veian mas claros que de los que realmente decia cuando se le daba click para inspeccionar (no en el prototipo).
-````
+Haznos saber que errores o mejoras encuentras en el componente o descripción, eso también es parte del trabajo. 
+¡Buscamos a alguien que nos ayude a hacer una mejor UX!
+
+- En el figma los colores se veian mas claros que de los que realmente decia cuando se le daba click para inspeccionar (no en el prototipo).
+- hay una funcionalidad de que cuando el usuario no selecciona al correcto, se resalta es el item correcto, pero y si hay mas de uno no seria muy claro para el usuario
+
+```
+
+```
