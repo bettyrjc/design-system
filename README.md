@@ -34,7 +34,7 @@ Aquí hay un ejemplo de cómo usar el componente `DropdownSelector`:
 import React, { useState } from "react";
 import DropdownSelector, {
   OptionsType,
-} from "mi-design-system/DropdownSelector";
+} from "musa-design-system"
 
 const App = () => {
   const options: OptionsType[] = [

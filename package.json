@@ -59,5 +59,6 @@
     "storybook": "^8.2.6",
     "tailwindcss": "^3.4.6",
     "webpack": "^5.93.0"
-  }
+  },
+  "keywords": ["design", "system", "react"]
 }
