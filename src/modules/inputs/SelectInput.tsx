@@ -4,8 +4,8 @@ import ChevronUpIcon from '../../assets/icons/ChevronUpIcon';
 import UserRoundedIcon from '../../assets/icons/UserRoundedIcon';
 import CheckIncon from '../../assets/icons/CheckIncon';
 
-type OptionsType = {
-  value: string;
+export type OptionsType = {
+  value: string | null;
   label: string;
 }
 type SelectInputProps = {
@@ -18,19 +18,30 @@ type SelectInputProps = {
   isDisabled?: boolean;
   isError?: boolean;
 
-  selectedOption: { value: string; label: string; } | null;
-  setSelectedOption: (value: { value: string; label: string; }) => void;
+  selectedOption: OptionsType | null;
+  setSelectedOption: (value: OptionsType) => void;
 }
-const SelectInput = ({ options, formGroupWidth, selectedOption,  setSelectedOption, labelText, hintText, emptyMessage = "No hay opciones disponibles", isDisabled = false, isError = false }: SelectInputProps) => {
+const SelectInput = ({
+  options,
+  formGroupWidth,
+  selectedOption,
+  setSelectedOption,
+  labelText,
+  hintText,
+  emptyMessage = "No hay opciones disponibles",
+  isDisabled = false,
+  isError = false }: SelectInputProps) => {
   const [isOpenOptions, setIsOpenOptions] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
-  const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string } | null>(null);
+  const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string | null } | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const toggleIconInput = isOpenOptions ? 'rotate-0' : 'rotate-180 text-gray-600'
-
-  const handleSelect = (value: string, label: string) => {
+  const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
+  const labelStyles = isError ? ' label--error' : ' label--default';
+  const hintStyles = isError ? 'text-red-500' : 'text-gray-600';
+  const handleSelect = (value: string | null, label: string) => {
     //if value is empty, reset the selected option
     if (!value) {
       setSelectedOption({
@@ -38,6 +49,7 @@ const SelectInput = ({ options, formGroupWidth, selectedOption,  setSelectedOpti
         label: '',
       })
       setIsOpenOptions(false);
+      setHoveredItemValue(null);
       return;
     }
     //set the selecting item to animate the selection
@@ -56,6 +68,7 @@ const SelectInput = ({ options, formGroupWidth, selectedOption,  setSelectedOpti
     setTimeout(() => {
       setSelectingItem(null);
       setIsOpenOptions(false);
+      setHoveredItemValue(null);
     }, 400);
   };
 
@@ -96,9 +109,6 @@ const SelectInput = ({ options, formGroupWidth, selectedOption,  setSelectedOpti
     }
   }, [isOpenOptions]);
 
-  const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
-  const labelStyles = isError ? ' label--error' : ' label--default';
-  const hintStyles = isError ? 'text-red-500' : 'text-gray-600';
   return (
     <div className={`relative  px-2 mt-5 bg-white ${formGroupWidth}`} ref={containerRef} >
       <div className="form--group" onClick={() => setIsOpenOptions(!isOpenOptions)}>
@@ -123,16 +133,16 @@ const SelectInput = ({ options, formGroupWidth, selectedOption,  setSelectedOpti
           className=" options scrollbar-hide"
         >
           {sortedOptions.length > 0 ? sortedOptions?.map((option, index) => {
-            const isHoveredItem = hoveredItemValue === index
-            const isCurrentItem = option.label === selectedOption?.label && !selectingItem;
-            const isSelectingItem = selectingItem?.value === option.value && selectingItem.isSelecting;
+            const isHoveredItem = hoveredItemValue === index //validate if the item by index is hover
+            const isCurrentItem = option.value === selectedOption?.value && !selectingItem; //selected item by value 
+            const isSelectingItem = selectingItem?.value === option.value && selectingItem.isSelecting; // selecting item, the current action of the user is doing
+            const isHoveringItem = isHoveredItem || isCurrentItem ? '3' : '2' //stroke width of the icon is the item is hovered or selected
             const selectedItemStyles = isCurrentItem || isSelectingItem
               ? 'options__item--hovered  options__item justify-between'
               : 'options__item justify-between';
             const selectedIconStyles = isCurrentItem || isSelectingItem
               ? 'options__item--icon text-green-600'
               : 'hidden ';
-
             return (
               <li
                 className={selectedItemStyles}
@@ -144,7 +154,7 @@ const SelectInput = ({ options, formGroupWidth, selectedOption,  setSelectedOpti
                 <div className='justify-start '>
                   <UserRoundedIcon
                     className="options__item--icon"
-                    strokeWidth={isHoveredItem || isCurrentItem ? '3' : '2'}
+                    strokeWidth={isHoveringItem}
                   />
                   <span>
                     {option.label}

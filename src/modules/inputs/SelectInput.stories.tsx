@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import SelectInput from "./SelectInput";
+import SelectInput, { OptionsType } from "./SelectInput";
+import { userDataMock } from '../../assets/mocks/data';
 // import { fn } from "@storybook/test";
 
 
 
 const meta: Meta<typeof SelectInput> = {
-  title: "Example/SelectInput",
+  title: "SelectInput",
   component: SelectInput,
 };
 
@@ -19,39 +20,27 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    options: [
-      { value: "1", label: "Victor Díaz" },
-      { value: "", label: "Max Mendex" },
-      { value: "", label: "Jesús Millán" },
-      { value: "", label: "Nicholas Yepes" },
-      { value: "", label: "Santiago Aceves" },
-      { value: "", label: "Sebastian" },
-      { value: "", label: "Axel rose" },
-    ],
+    options: userDataMock,
     labelText: "Elige un usuario",
     hintText: "Solo podrás elegir a Victor para continuar",
   },
   render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
       <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
   },
 };
 
-export const customParentWidth: Story = {
+export const CustomParentWidth: Story = {
   args: {
-    options: [
-      { value: "1", label: "Victor Díaz" },
-      { value: "", label: "Max Mendex" },
-      { value: "", label: "Jesús Millán" },
-    ],
+    options: userDataMock,
     labelText: "Elige un usuario",
     hintText: "Solo podrás elegir a Victor para continuar",
     formGroupWidth: "w-full lg:w-1/2",
   },
   render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
       <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
@@ -66,7 +55,7 @@ export const CustomEmptyMessage: Story = {
     emptyMessage: "No hay usuarios disponibles",
   },
   render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
       <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
@@ -80,7 +69,7 @@ export const Disabled: Story = {
     isDisabled: true,
   },
   render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
       <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );
@@ -88,17 +77,13 @@ export const Disabled: Story = {
 };
 export const Error: Story = {
   args: {
-    options: [
-      { value: "1", label: "Victor Díaz" },
-      { value: "", label: "Max Mendex" },
-      { value: "", label: "Jesús Millán" },
-    ],
+    options: userDataMock,
     labelText: "Elige un usuario",
     isError: true,
     hintText: "Solo podrás elegir a Victor para continuar",
   },
   render: (args) => {
-    const [selectedOption, setSelectedOption] = useState<{ value: string; label: string; } | null>(null);
+    const [selectedOption, setSelectedOption] = useState<OptionsType | null>(null);
     return (
       <SelectInput {...args} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
     );

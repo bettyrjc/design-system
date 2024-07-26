@@ -1,25 +1,17 @@
 import React from 'react';
 import './assets/ui/index.css';
-import SelectInput from './modules/inputs/SelectInput';
+import SelectInput, { OptionsType } from './modules/inputs/SelectInput';
+import { userDataMock } from './assets/mocks/data';
 
 
 function App() {
-  const [selectedOption, setSelectedOption] = React.useState<{ value: string; label: string; } | null>(null);
-  const options = [
-    { value: '1', label: 'Victor Díaz' },
-    { value: '', label: 'Max Mendex' },
-    { value: '', label: 'Jesús Millán' },
-    { value: '', label: 'Nicholas Yepes' },
-    { value: '', label: 'Santiago Aceves' },
-    { value: '', label: 'Sebastian' },
-    { value: '', label: 'Axel rose' },
-  ];
+  const [selectedOption, setSelectedOption] = React.useState<OptionsType | null>(null);
   return (
     <div className="w-full max-h-screen bg-white ">
       <SelectInput
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
-        options={options}
+        options={userDataMock}
         hintText="Solo podrás elegir a Victor para continuar"
       />
 

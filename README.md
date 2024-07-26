@@ -74,12 +74,7 @@ The class in components will write with BEM to identify block, element and modif
 ├── buttons
 └── inputs
 
----
 
-Documenta aquellas cosas que te gustaron, y no te gustaron de tu proyecto.
-Queremos entender porque tomaste las decisiones que tomaste.
-
----
 
 # how to run project
 - npm run start
@@ -89,15 +84,25 @@ Queremos entender porque tomaste las decisiones que tomaste.
 if you make a change:
 
 - npm run build-storybook
-- git add file
-- git commit -m ''
+- git add files
+- git commit -m 'message commit'
 - git push origin branch
 
-with it,this is uploading to vercel
 ## visit link
 [Link vercel] ('https://design-system-git-main-betty-jimenezs-projects.vercel.app/')
- is 
+
 # improve (También agrega las mejoras que se pueden hacer pero ya no pudiste.)
 - scroll smooth to up when is already selected one to see its new position
--separate input in another component
-- state should be in parent element not in child
+- state should be in parent element not in child ✅
+- if it selection someone does not have value, should no change strokeWidth
+- only must have a selected input not more than one
+
+--- 
+# Comments
+
+Documenta aquellas cosas que te gustaron, y no te gustaron de tu proyecto.
+Queremos entender porque tomaste las decisiones que tomaste.
+
+<!-- Not like -->
+-> en el figma los colores se veian mas claros que de los que realmente decia cuando se le daba click  para inspeccionar (no en el prototipo).
+---
