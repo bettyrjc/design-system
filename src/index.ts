@@ -1,1 +1,1 @@
-export * from './modules/dropdown/DropdownSelector';
+export { default as DropdownSelector } from './modules/dropdown/DropdownSelector';
