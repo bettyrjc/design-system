@@ -3,34 +3,36 @@
 ## ITCSS and atom design
 
 styles architectura how should be
+
+```
 ├── settings
-│   ├── tailwind imports
-│   └── typography.css
+│ ├── tailwind imports
+│ └── typography.css
 ├── tools
-│    for moment we are no using tools
+│ for moment we are no using tools
 ├── generic
-│   └── scrollbar.css
+│ └── scrollbar.css
 ├── elements
-│    └── index.css - tags
+│ └── index.css - tags
 ├── objects
-│   ├── flex.css
-│   ├── positions.css
-│   └── index.css
+│ ├── flex.css
+│ ├── positions.css
+│ └── index.css
 ├── components
-│   ├── atoms
-│    ├── button.css
-│    ├── input.css
-│    └── label.css
-│   ├── molecules
-│     ├── card.css
-│     └── form.css
-│   └── organisms
-│     ├── gallery.css
-│     └── header.css
-│
+│ ├── atoms
+│ │ ├── button.css
+│ │ ├── input.css
+│ │ └── label.css
+│ ├── molecules
+│ │ ├── card.css
+│ │ └── form.css
+│ └── organisms
+│ ├── gallery.css
+│ └── header.css
 ├── utilities (we name it shared because rule ! utilities)
-│   └── error.css
+│ └── error.css
 └── index.scss
+```
 
 ## Settings and Tools
 
@@ -60,36 +62,40 @@ Utility classes like `is-error`, `is-centered`, etc., will always override previ
 
 The class in components will write with BEM to identify block, element and modifier
 
-- architecture  block elements  and must be separated  (__)  and modifier (--)
-  example: block__element--modifier
+- architecture block elements and must be separated (**) and modifier (--)
+  example: block**element--modifier
 
 # STRUCTURE IN COMPONENTS
 
+````
 ├── assets static elements and css
-│   ├── icons - svg icons
-│   ├── mocks - static data
-│   └── ui - css styles
-│ 
-└── modules (organized for item)
-    ├── Dropdown - fields to  recolects user info
-    └── buttons
+│ ├── icons - svg icons
+│ ├── mocks - static data
+│ └── ui - css styles
+└── modules (organized for item)
+   ├── Dropdown - fields to recolects user info
+└── buttons```
+---
 
 # how to run project
-- npm run start
-- npm run storybook
+
+- `npm run start`
+- `npm run storybook`
 
 # how deploy project to vercel
-- npm run build-storybook
-- git add files
-- git commit -m 'message commit'
-- git push origin branch
+
+- `npm run build-storybook`
+- `git add files`
+- `git commit -m 'message commit'`
+- `git push origin branch`
 
 ## visit link
-[Link vercel] ('https://design-system-git-main-betty-jimenezs-projects.vercel.app/')
+
+[Link vercel](https://design-system-git-main-betty-jimenezs-projects.vercel.app/)
 
 # IMPROVE (También agrega las mejoras que se pueden hacer pero ya no pudiste.)
 
-- scroll smooth to up when is already selected one to see its new position
+- mantain position while options is open
 - state should be in parent element not in child ✅
 - if it selection someone does not have value, should no change strokeWidth ✅
 - only must have a selected input not more than one ✅
@@ -103,6 +109,10 @@ The class in components will write with BEM to identify block, element and modif
   - put a error and disabled
 - check all names in class
 
+<!-- I don't do -->
+
+- when user is not selecting a user in figma highlighted the correct/only selection but I think it is figma, because when there are more than one, which would highlighted?
+
 ---
 
 # Comments
@@ -113,3 +123,4 @@ Queremos entender porque tomaste las decisiones que tomaste.
 <!-- Not like -->
 
 ## -> en el figma los colores se veian mas claros que de los que realmente decia cuando se le daba click para inspeccionar (no en el prototipo).
+````
