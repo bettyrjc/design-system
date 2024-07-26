@@ -1,16 +1,26 @@
 {
   "name": "musa-design-system",
   "author": "Betty",
-  "version": "0.0.81",
+  "version": "0.0.88",
   "private": false,
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "license": "ISC",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "type": "module",
   "peerDependencies": {
-    "web-vitals": "^2.1.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,37 +51,33 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@storybook/addon-essentials": "^8.2.6",
     "@storybook/addon-interactions": "^8.2.6",
     "@storybook/addon-links": "^8.2.6",
     "@storybook/addon-onboarding": "^8.2.6",
     "@storybook/blocks": "^8.2.6",
+    "@storybook/preset-create-react-app": "^8.2.6",
     "@storybook/react": "^8.2.6",
     "@storybook/react-webpack5": "^8.2.6",
     "@storybook/test": "^8.2.6",
-    "prop-types": "^15.8.1",
-    "storybook": "^8.2.6",
-    "tailwindcss": "^3.4.6",
-    "webpack": "^5.93.0",
-    "eslint-plugin-storybook": "^0.8.0",
-    "@storybook/preset-create-react-app": "^8.2.6",
     "@types/node": "^16.18.104",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "typescript": "^4.9.5"
+    "eslint-plugin-storybook": "^0.8.0",
+    "prop-types": "^15.8.1",
+    "rollup": "^2.79.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "storybook": "^8.2.6",
+    "tailwindcss": "^3.4.6",
+    "typescript": "^4.9.5",
+    "webpack": "^5.93.0"
   },
   "keywords": [
     "design",
     "system",
     "react"
-  ],
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  }
+  ]
 }
