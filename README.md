@@ -67,15 +67,15 @@ The class in components will write with BEM to identify block, element and modif
 
 # STRUCTURE IN COMPONENTS
 
-````
+```
 ├── assets static elements and css
 │ ├── icons - svg icons
 │ ├── mocks - static data
 │ └── ui - css styles
 └── modules (organized for item)
    ├── Dropdown - fields to recolects user info
-└── buttons```
----
+└── buttons
+```
 
 # how to run project
 
@@ -95,7 +95,7 @@ The class in components will write with BEM to identify block, element and modif
 
 # IMPROVE (También agrega las mejoras que se pueden hacer pero ya no pudiste.)
 
-- mantain position while options is open
+- mantain position while options is open ✅
 - state should be in parent element not in child ✅
 - if it selection someone does not have value, should no change strokeWidth ✅
 - only must have a selected input not more than one ✅
@@ -117,10 +117,10 @@ The class in components will write with BEM to identify block, element and modif
 
 # Comments
 
-Documenta aquellas cosas que te gustaron, y no te gustaron de tu proyecto.
+Documenta aquellas cosas que te gustaron, y .
 Queremos entender porque tomaste las decisiones que tomaste.
 
-<!-- Not like -->
 
-## -> en el figma los colores se veian mas claros que de los que realmente decia cuando se le daba click para inspeccionar (no en el prototipo).
+### no te gustaron de tu proyecto
+ en el figma los colores se veian mas claros que de los que realmente decia cuando se le daba click para inspeccionar (no en el prototipo).
 ````

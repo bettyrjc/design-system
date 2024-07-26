@@ -29,18 +29,19 @@ const DropdownSelector = ({
   hintText,
   emptyMessage = "No hay opciones disponibles",
   isDisabled = false,
-  isError = false }: DropdownSelectorProps) => {
+  isError = false
+}: DropdownSelectorProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
   const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string | null } | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
-  const [defaultValue, setDefaultValue] = useState<OptionsType | null>( null);
+  const [defaultValue, setDefaultValue] = useState<OptionsType | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const toggleIconInput = isDropdownOpen ? 'rotate-0' : 'rotate-180 text-gray-600'
   const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
-  const labelStyles = isError ? ' label--error' : ' label--default';
+  const labelStyles = isError ? ' label label--error' : ' label label--default';
   const hintStyles = isError ? 'text-error' : 'text-gray-600';
 
   const handleSelect = (value: string, label: string) => {
@@ -106,11 +107,11 @@ const DropdownSelector = ({
           placeholder=" "
           value={selectedOption?.label && selectedOption?.label}
           readOnly
-          id="custom-select"
+          id="custom-dropdown"
           ref={inputRef}
           disabled={isDisabled}
         />
-        {labelText && <label className={`label ${labelStyles}`} htmlFor="custom-select">{labelText}</label>}
+        {labelText && <label className={labelStyles} htmlFor="custom-dropdown">{labelText}</label>}
         <div className={`right-2.5 absolute-center-y`}>
           <ChevronUpIcon className={`${toggleIconInput} w-4 h-4 cursor-pointer`} />
         </div>
@@ -118,36 +119,38 @@ const DropdownSelector = ({
       {hintText && !isDropdownOpen && <span className={`mt-1 ml-1 | ${hintStyles} text-xs`}>{hintText}</span>}
       {isDropdownOpen && (
         <ul className="options scrollbar-hide">
-          {sortedOptions.length > 0 ? sortedOptions?.map((option, index) => {
-            const optionValue = option.value
-            const optionLabel = option.label
-            const isHoveredItem = hoveredItemValue === index //validate if the item by index is hover
-            const isCurrentItem = optionValue === selectedOption?.value && !selectingItem; //selected item by value 
-            const isSelectingItem = selectingItem?.value === optionValue && selectingItem.isSelecting; // selecting item, the current action of the user is doing
-            const isHoveringItem = isHoveredItem || isCurrentItem ? '3' : '2' //stroke width of the icon is the item is hovered or selected
-            const selectedItemStyles = isCurrentItem || isSelectingItem
-              ? `options__item--hovered  options__item justify-between ${option?.value && 'cursor-pointer'}`
-              : `options__item justify-between ${option?.value && 'cursor-pointer'}`;
-            const checkIconStyles = isCurrentItem || isSelectingItem // only show when item have been selected
-              ? 'w-4 h-4 text-green-600'
-              : 'hidden ';
-            return (
-              <li
-                className={selectedItemStyles}
-                key={`${optionValue}-${index}`}
-                onClick={optionValue ? () => handleSelect(optionValue, optionLabel) : undefined} //handle the selection of the item and option value is not null
-                onMouseEnter={() => setHoveredItemValue(index)}
-                onMouseLeave={() => setHoveredItemValue(null)}
-              >
-                <div className='justify-start'>
-                  <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem} />
-                  <span>{optionLabel}</span>
-                </div>
+          {sortedOptions.length > 0
+            ? sortedOptions?.map((option, index) => {
+              const optionValue = option.value
+              const optionLabel = option.label
+              const isHoveredItem = hoveredItemValue === index //validate if the item by index is hover
+              const isCurrentItem = optionValue === selectedOption?.value && !selectingItem; //selected item by value 
+              const isSelectingItem = selectingItem?.value === optionValue && selectingItem.isSelecting; // selecting item, the current action of the user is doing
+              const isHoveringItem = isHoveredItem || isCurrentItem ? '3' : '2' //stroke width of the icon is the item is hovered or selected
+              const selectedItemStyles = isCurrentItem || isSelectingItem
+                ? `options__item--hovered  options__item justify-between ${option?.value && 'cursor-pointer'}`
+                : `options__item justify-between ${option?.value && 'cursor-pointer'}`;
+              const checkIconStyles = isCurrentItem || isSelectingItem // only show when item have been selected
+                ? 'w-4 h-4 text-green-600'
+                : 'hidden ';
+              return (
+                <li
+                  className={selectedItemStyles}
+                  key={`${optionValue}-${index}`}
+                  onClick={optionValue ? () => handleSelect(optionValue, optionLabel) : undefined} //handle the selection of the item and option value is not null
+                  onMouseEnter={() => setHoveredItemValue(index)}
+                  onMouseLeave={() => setHoveredItemValue(null)}
+                >
+                  <div className='justify-start'>
+                    <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem} />
+                    <span>{optionLabel}</span>
+                  </div>
 
-                <CheckIncon className={checkIconStyles} />
-              </li>
-            )
-          }) : <li className='text-gray-300 flex-centered'>{emptyMessage}</li>}
+                  <CheckIncon className={checkIconStyles} />
+                </li>
+              )
+            })
+            : <li className='text-gray-300 flex-centered'>{emptyMessage}</li>}
         </ul>
       )}
     </div>
