@@ -1,7 +1,7 @@
 {
   "name": "musa-design-system",
   "author": "Betty",
-  "version": "0.0.99",
+  "version": "1.1.1",
   "private": false,
   "type": "module",
   "main": "dist/index.cjs.js",
@@ -15,11 +15,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "rollup -c",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "storybook dev -p 6006",
+    "start": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "eslintConfig": {
