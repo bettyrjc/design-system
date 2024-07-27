@@ -1,7 +1,8 @@
 import React, { ComponentProps, useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import SearchDropdown, { OptionsType } from "./SearchDropdown";
+import SearchDropdown from "./SearchDropdown";
 import { userDataMock } from '../../assets/mocks/userDataMock';
+import { OptionsType } from '../../assets/types/options.types';
 // import { fn } from "@storybook/test";
 
 const meta: Meta<typeof SearchDropdown> = {

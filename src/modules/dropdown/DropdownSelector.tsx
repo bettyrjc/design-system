@@ -3,23 +3,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import ChevronUpIcon from '../../assets/icons/ChevronUpIcon';
 import UserRoundedIcon from '../../assets/icons/UserRoundedIcon';
 import CheckIncon from '../../assets/icons/CheckIncon';
+import { DropdownSelectorProps, OptionsType, SelectingItem } from '../../assets/types/options.types';
 
-export type OptionsType = {
-  value: string | null;
-  label: string;
-}
-type DropdownSelectorProps = {
-  name?: string;
-  options: OptionsType[];
-  labelText?: string;
-  hintText?: string;
-  formGroupWidth?: string;
-  emptyMessage?: string;
-  isDisabled?: boolean;
-  isError?: boolean;
-  selectedOption: OptionsType | null;
-  setSelectedOption: (value: OptionsType | null) => void;
-}
+
 const DropdownSelector = ({
   options,
   formGroupWidth,
@@ -33,7 +19,7 @@ const DropdownSelector = ({
 }: DropdownSelectorProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
-  const [selectingItem, setSelectingItem] = useState<{ isSelecting: boolean; value: string | null } | null>(null);
+  const [selectingItem, setSelectingItem] = useState<SelectingItem | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
   const [defaultValue, setDefaultValue] = useState<OptionsType | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
