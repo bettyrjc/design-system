@@ -1,2 +1,3 @@
 import DropdownSelector from './modules/dropdown/DropdownSelector';
-export { DropdownSelector };
+import SearchDropdown from './modules/search-dropdown/SearchDropdown';
+export { DropdownSelector, SearchDropdown };
