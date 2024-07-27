@@ -671,6 +671,9 @@ video {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
+.pb-1{
+  padding-bottom: 0.25rem;
+}
 .text-base{
   font-size: 1rem;
   line-height: 1.5rem;
@@ -714,6 +717,9 @@ video {
 }
 .blur{
   --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.filter{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .transition{
@@ -1212,7 +1218,7 @@ a {
 .options {
   margin: 0;
   box-shadow: 0px 4px 8px 0px #4043443D;
-  height: 128px;
+  max-height: 128px;
   margin-top: 0.25rem;
   width: 100%;
   overflow-y: auto;
@@ -1220,6 +1226,7 @@ a {
   border-width: 1px;
   border-color: transparent;
   padding: 0.5rem;
+  padding-bottom: 0.25rem;
 }
 
 .options__item {
@@ -1276,4 +1283,4 @@ a {
 
 /*config out styles add tailwind and font family*/ /* Elements: add style to tags h1,p1 body */ /* only add structure*/ /* only add style to tags like button, input, etc */ /* only add style to tags like form, card, etc */ /* shared styles like error color*/
 
-/*# sourceMappingURL=main.b2388936.css.map*/
+/*# sourceMappingURL=main.4d9a61e2.css.map*/
