@@ -6,7 +6,7 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 
 import pkg from './package.json';
 
-export default {
+const config = {
   input: 'src/index.ts',
   output: [
     {
@@ -28,3 +28,5 @@ export default {
     typescript({ tsconfig: './tsconfig.json' }),
   ],
 };
+
+export default config;

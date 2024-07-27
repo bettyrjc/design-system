@@ -85,7 +85,6 @@ The class in components will write with BEM to identify block, element and modif
 # how to run project
 
 - `npm run start`
-- `npm run storybook`
 
 # how deploy project to vercel
 
@@ -93,6 +92,12 @@ The class in components will write with BEM to identify block, element and modif
 - `git add files`
 - `git commit -m 'message commit'`
 - `git push origin branch`
+
+# how publish project to npm
+- `git add files` (you must change version-tag)
+- `git commit -m 'message commit'`
+- `npm run build`
+- `npm publish`
 
 ## visit link
 

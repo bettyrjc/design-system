@@ -1,4 +1,4 @@
-### DropdownSelector
+### DropdownSelector y Search dropdown
 
 `DropdownSelector` es un componente de selección desplegable personalizado en React. Permite a los usuarios seleccionar una opción de una lista proporcionada, con varias propiedades configurables para personalizar su comportamiento y apariencia.
 
@@ -32,9 +32,7 @@ Aquí hay un ejemplo de cómo usar el componente `DropdownSelector`:
 
 ```tsx
 import React, { useState } from "react";
-import DropdownSelector, {
-  OptionsType,
-} from "musa-design-system"
+import {DropdownSelector} from "musa-design-system"
 
 const App = () => {
   const options: OptionsType[] = [
@@ -75,3 +73,4 @@ export default App;
 - **Selección de Opción**: Las opciones se pueden seleccionar al hacer clic en ellas, lo que actualiza la opción seleccionada y cierra el desplegable.
 - **Ordenamiento de Opciones**: Las opciones se ordenan alfabéticamente y la opción seleccionada se coloca al principio de la lista cuando el desplegable está abierto.
 - **Estilos de Selección y Hover**: Se aplican estilos específicos cuando una opción está seleccionada o cuando el usuario pasa el cursor sobre una opción.
+- **Búsqueda**: Se puede buscar escribiendo en el input y va filtrando por letra
