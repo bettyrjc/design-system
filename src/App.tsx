@@ -1,7 +1,8 @@
 import React from 'react';
 import './assets/ui/index.css';
-import DropdownSelector, { OptionsType } from './modules/dropdown/DropdownSelector';
+import DropdownSelector from './modules/dropdown/DropdownSelector';
 import { userDataMock } from './assets/mocks/userDataMock';
+import { OptionsType } from './assets/types/options.types';
 
 function App() {
   const [selectedOption, setSelectedOption] = React.useState<OptionsType | null>(null);
