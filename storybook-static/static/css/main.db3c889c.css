@@ -1156,8 +1156,6 @@ a {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   font-size: 0.875rem;
   line-height: 1.25rem;
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity)); /*TODO: los colores deberian cambiar ???*/
 }
 
 .label--default{
@@ -1184,8 +1182,6 @@ a {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   font-size: 0.875rem;
   line-height: 1.25rem;
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity)); /*TODO: los colores deberian cambiar ???*/ /*TODO: los colores deberian cambiar ???*/ /*TODO: los colores deberian cambiar ???*/
 }
 
 .label--error{
@@ -1212,8 +1208,6 @@ a {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   font-size: 0.875rem;
   line-height: 1.25rem;
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity)); /*TODO: los colores deberian cambiar ???*/ /*TODO: los colores deberian cambiar ???*/ /*TODO: los colores deberian cambiar ???*/
 }
 .options {
   margin: 0;
@@ -1241,7 +1235,6 @@ a {
   line-height: 22px;
   height: 30px;
   padding: 4px 8px 4px 8px;
-  opacity: 0px;
 }
 
 .options__item--hovered {
@@ -1284,4 +1277,4 @@ a {
 
 /*config out styles add tailwind and font family*/ /* Elements: add style to tags h1,p1 body */ /* only add structure*/ /* only add style to tags like button, input, etc */ /* only add style to tags like form, card, etc */ /* shared styles like error color*/
 
-/*# sourceMappingURL=main.81cc568d.css.map*/
+/*# sourceMappingURL=main.db3c889c.css.map*/

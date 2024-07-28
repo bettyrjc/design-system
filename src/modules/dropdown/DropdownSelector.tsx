@@ -5,7 +5,6 @@ import UserRoundedIcon from '../../assets/icons/UserRoundedIcon';
 import CheckIncon from '../../assets/icons/CheckIncon';
 import { DropdownSelectorProps, OptionsType, SelectingItem } from '../../assets/types/options.types';
 
-
 const DropdownSelector = ({
   options,
   formGroupWidth,

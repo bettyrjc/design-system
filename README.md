@@ -32,7 +32,8 @@ Aquí hay un ejemplo de cómo usar el componente `DropdownSelector`:
 
 ```tsx
 import React, { useState } from "react";
-import {DropdownSelector} from "musa-design-system"
+import 'musa-design-system/dist/index.cjs.css'; //estilos de los componentes
+import { DropdownSelector, SearchDropdown } from 'musa-design-system';
 
 const App = () => {
   const options: OptionsType[] = [
