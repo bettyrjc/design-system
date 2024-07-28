@@ -14,7 +14,7 @@
 .input:focus+.label,
 .input:not(:placeholder-shown)+.label,
 .input:-webkit-autofill+.label {
-  @apply text-gray-600 text-sm left-2.5 bg-white -top-3; /*TODO: los colores deberian cambiar ???*/
+  @apply text-sm left-2.5 bg-white -top-3;
 }
 
 .label--default {
