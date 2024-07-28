@@ -129,7 +129,7 @@ const DropdownSelector = ({
                 >
                   <div className='justify-start'>
                     <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem} />
-                    <span>{optionLabel}</span>
+                    <span className="text-gray-900">{optionLabel}</span>
                   </div>
 
                   <CheckIncon className={checkIconStyles} />

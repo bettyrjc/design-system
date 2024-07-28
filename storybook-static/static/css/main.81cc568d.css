@@ -1237,6 +1237,7 @@ a {
   line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
+  color: #1f2937; /* text-gray-900 */
   line-height: 22px;
   height: 30px;
   padding: 4px 8px 4px 8px;
@@ -1283,4 +1284,4 @@ a {
 
 /*config out styles add tailwind and font family*/ /* Elements: add style to tags h1,p1 body */ /* only add structure*/ /* only add style to tags like button, input, etc */ /* only add style to tags like form, card, etc */ /* shared styles like error color*/
 
-/*# sourceMappingURL=main.4d9a61e2.css.map*/
+/*# sourceMappingURL=main.81cc568d.css.map*/

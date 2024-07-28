@@ -136,7 +136,7 @@ var DropdownSelector = function (_a) {
                         var checkIconStyles = isCurrentItem || isSelectingItem // only show when item have been selected
                             ? 'w-4 h-4 text-green-600'
                             : 'hidden ';
-                        return (jsxs("li", __assign({ className: selectedItemStyles, onClick: optionValue ? function () { return handleSelect(optionValue, optionLabel); } : undefined, onMouseEnter: function () { return setHoveredItemValue(index); }, onMouseLeave: function () { return setHoveredItemValue(null); } }, { children: [jsxs("div", __assign({ className: 'justify-start' }, { children: [jsx(UserRoundedIcon, { className: "w-4 h-4", strokeWidth: isHoveringItem }), jsx("span", { children: optionLabel })] })), jsx(CheckIncon, { className: checkIconStyles })] }), "".concat(optionValue, "-").concat(index)));
+                        return (jsxs("li", __assign({ className: selectedItemStyles, onClick: optionValue ? function () { return handleSelect(optionValue, optionLabel); } : undefined, onMouseEnter: function () { return setHoveredItemValue(index); }, onMouseLeave: function () { return setHoveredItemValue(null); } }, { children: [jsxs("div", __assign({ className: 'justify-start' }, { children: [jsx(UserRoundedIcon, { className: "w-4 h-4", strokeWidth: isHoveringItem }), jsx("span", __assign({ className: "text-gray-900" }, { children: optionLabel }))] })), jsx(CheckIncon, { className: checkIconStyles })] }), "".concat(optionValue, "-").concat(index)));
                     })
                     : jsx("li", __assign({ className: 'text-gray-300 flex-centered' }, { children: emptyMessage })) })))] })));
 };
@@ -235,7 +235,7 @@ var SearchDropdown = function (_a) {
                         var checkIconStyles = isCurrentItem || isSelectingItem // only show when item have been selected
                             ? 'w-4 h-4 text-green-600'
                             : 'hidden ';
-                        return (jsxs("li", __assign({ className: selectedItemStyles, onClick: optionValue ? function () { return handleSelect(optionValue, optionLabel); } : undefined, onMouseEnter: function () { return setHoveredItemValue(index); }, onMouseLeave: function () { return setHoveredItemValue(null); } }, { children: [jsxs("div", __assign({ className: 'justify-start' }, { children: [jsx(UserRoundedIcon, { className: "w-4 h-4", strokeWidth: isHoveringItem }), jsx("span", { children: optionLabel })] })), jsx(CheckIncon, { className: checkIconStyles })] }), "".concat(optionValue, "-").concat(index)));
+                        return (jsxs("li", __assign({ className: selectedItemStyles, onClick: optionValue ? function () { return handleSelect(optionValue, optionLabel); } : undefined, onMouseEnter: function () { return setHoveredItemValue(index); }, onMouseLeave: function () { return setHoveredItemValue(null); } }, { children: [jsxs("div", __assign({ className: 'justify-start' }, { children: [jsx(UserRoundedIcon, { className: "w-4 h-4", strokeWidth: isHoveringItem }), jsx("span", __assign({ className: "text-gray-900" }, { children: optionLabel }))] })), jsx(CheckIncon, { className: checkIconStyles })] }), "".concat(optionValue, "-").concat(index)));
                     })
                     : jsx("li", __assign({ className: 'text-gray-300 flex-centered' }, { children: emptyMessage })) })))] })));
 };

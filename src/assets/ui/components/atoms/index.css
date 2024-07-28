@@ -1,7 +1,7 @@
 /* import inputs */
-@import 'inputs/input.css';
-@import 'inputs/label.css';
+@import './inputs/input.css';
+@import './inputs/label.css';
 
-@import 'dropdown/options.css';
+@import './dropdown/options.css';
 
 /* import buttons */
