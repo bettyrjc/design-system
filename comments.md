@@ -116,7 +116,7 @@ example: block\*\*element--modifier
 
 # how deploy project to vercel
 
-- `npm run build:storybook`
+- `npm run build-storybook`
 - `git add files`
 - `git commit -m 'message commit'`
 - `git push origin branch`
