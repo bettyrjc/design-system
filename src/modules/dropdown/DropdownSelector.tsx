@@ -99,7 +99,7 @@ const DropdownSelector = ({
           type="text"
           className={`input ${inputStyles}`}
           placeholder=" "
-          value={selectedOption?.length > 0 && selectedOption.map((option: OptionsType) => option.label).join(', ')}
+          value={selectedOption?.length > 0 ? selectedOption.map((option: OptionsType) => option.label).join(', ') : ''}
           readOnly
           id="custom-dropdown"
           ref={inputRef}
