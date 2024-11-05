@@ -15,7 +15,7 @@ function App() {
         setSelectedOption={setSelectedOption}
         options={userDataMock}
         labelText='Elige un usuario'
-        hintText="Solo podrás elegir a Victor para continuar"
+        hintText="Elige cualquier nombre para continuar"
         isError={false}
         isDisabled={false}
         formGroupWidth=""
@@ -25,7 +25,7 @@ function App() {
         setSelectedOption={setSelectedOption}
         options={userDataMock}
         labelText='Elige un usuario'
-        hintText="Solo podrás elegir a Victor para continuar"
+        hintText="Elige cualquier nombre para continuar"
         isError={false}
         isDisabled={false}
         formGroupWidth=""

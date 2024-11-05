@@ -25,7 +25,7 @@ export const Default: Story = {
   args: {
     options: userDataMock,
     labelText: "Elige un usuario",
-    hintText: "Solo podrás elegir a Victor para continuar",
+    hintText: "Elige cualquier nombre para continuar",
   },
   render: renderDropdown,
 };
@@ -34,7 +34,7 @@ export const CustomParentWidth: Story = {
   args: {
     options: userDataMock,
     labelText: "Elige un usuario",
-    hintText: "Solo podrás elegir a Victor para continuar",
+    hintText: "Elige cualquier nombre para continuar",
     formGroupWidth: "w-full lg:w-1/2",
   },
   render:renderDropdown,
@@ -44,7 +44,7 @@ export const CustomEmptyMessage: Story = {
   args: {
     options: [],
     labelText: "Elige un usuario",
-    hintText: "Solo podrás elegir a Victor para continuar",
+    hintText: "Elige cualquier nombre para continuar",
     emptyMessage: "No hay usuarios disponibles",
   },
   render: renderDropdown,
@@ -62,7 +62,7 @@ export const Error: Story = {
   args: {
     options: userDataMock,
     labelText: "Elige un usuario",
-    hintText: "Solo podrás elegir a Victor para continuar",
+    hintText: "Elige cualquier nombre para continuar",
     isError: true,
   },
   render: renderDropdown,
