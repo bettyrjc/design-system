@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-restricted-globals */
 import React, { useEffect, useRef, useState } from 'react';
 import ChevronUpIcon from '../../assets/icons/ChevronUpIcon';
@@ -28,10 +29,18 @@ const DropdownSelector = ({
   const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
   const labelStyles = isError ? ' label label--error' : ' label label--default';
   const hintStyles = isError ? 'text-error' : 'text-gray-600';
-
+  console.log(selectedOption)
   const handleSelect = (value: string, label: string) => {
     setSelectingItem({ isSelecting: true, value });  //set the selecting item to animate the selection
-    setSelectedOption({ value, label }); //set the selected option
+    setSelectedOption(
+      (prev: any[]) => {
+        // Verifica si prev es un array
+        if (!Array.isArray(prev)) {
+          return [{ value, label }];
+        }
+        return [...prev, { value, label }];
+      }
+    )
     //close the options after the 400 ms
     setTimeout(() => {
       setSelectingItem(null);
@@ -90,7 +99,7 @@ const DropdownSelector = ({
           type="text"
           className={`input ${inputStyles}`}
           placeholder=" "
-          value={selectedOption?.label && selectedOption?.label}
+          value={selectedOption?.length > 0 && selectedOption.map((option: OptionsType) => option.label).join(', ')}
           readOnly
           id="custom-dropdown"
           ref={inputRef}

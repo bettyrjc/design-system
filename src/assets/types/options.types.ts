@@ -14,6 +14,6 @@ export type DropdownSelectorProps = {
   emptyMessage?: string;
   isDisabled?: boolean;
   isError?: boolean;
-  selectedOption: OptionsType | null;
-  setSelectedOption: (value: OptionsType | null) => void;
+  selectedOption:any;
+  setSelectedOption: any;
 }
