@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import clsx from 'clsx';
 
-type Color = 'primary' | 'secondary' | 'tertiary' | 'transparent' | 'white';
+type Color = 'primary' | 'secondary' | 'tertiary';
 
-type Variant = 'transparent' | 'filled';
+type Variant = 'filled';
 
 type IconButtonProps = {
   icon: React.ReactNode;
@@ -23,12 +23,12 @@ const IconButton: FC<IconButtonProps> = ({
   return (
     <button
       className={clsx(
-        'cursor-pointer rounded-full p-3 text-white',
-        variant === 'filled' && color === 'primary' && 'bg-violet-500',
-        variant === 'filled' && color === 'secondary' && 'bg-gray-600',
-        variant === 'filled' && color === 'tertiary' && 'bg-fuchsia-500',
-        size === 'small' && 'h-8 w-8  text-xs',
-        size === 'normal' && 'h-12 w-12  text-xl'
+        'cursor-pointer rounded-full  text-white',
+        variant === 'filled' && color === 'primary' && 'bg-primary',
+        variant === 'filled' && color === 'secondary' && 'bg-secondary',
+        variant === 'filled' && color === 'tertiary' && 'bg-yellow-500',
+        size === 'small' && 'h-8 w-8  text-xs p-2.5',
+        size === 'normal' && 'h-12 w-12  text-xl p-3.5',
       )}
       onClick={onClick}
     >
