@@ -1,11 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-/* eslint-disable no-restricted-globals */
-import React, { useEffect, useRef, useState } from 'react';
-import ChevronUpIcon from '../../assets/icons/ChevronUpIcon';
-import UserRoundedIcon from '../../assets/icons/UserRoundedIcon';
-import CheckIncon from '../../assets/icons/CheckIncon';
-import { DropdownSelectorProps, OptionsType, SelectingItem } from '../../assets/types/options.types';
+import { useEffect, useRef, useState } from 'react';
+import { HiChevronUp } from 'react-icons/hi2';
+import clsx from 'clsx';
+
+import ListDropdown from './components/ListDropdown';
+import { DropdownSelectorProps, OptionsType } from '../../assets/types/options.types';
 
 const DropdownSelector = ({
   options,
@@ -18,139 +16,105 @@ const DropdownSelector = ({
   isDisabled = false,
   isError = false
 }: DropdownSelectorProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
-  const [selectingItem, setSelectingItem] = useState<SelectingItem | null>(null);
-  const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
-  const [defaultValue, setDefaultValue] = useState<OptionsType | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const onValueJoin = selectedOption?.length > 0 ? selectedOption.map((option: OptionsType) => option.label).join(', ') : '';
 
-  const toggleIconInput = isDropdownOpen ? 'rotate-0' : 'rotate-180 text-gray-600'
-  const inputStyles = isDisabled ? ' input--disabled' : isError ? ' input--error' : ' input--default';
-  const labelStyles = isError ? ' label label--error' : ' label label--default';
-  const hintStyles = isError ? 'text-error' : 'text-gray-600';
-  console.log(selectedOption)
-  const handleSelect = (value: string, label: string) => {
-    setSelectingItem({ isSelecting: true, value });  //set the selecting item to animate the selection
-    setSelectedOption(
-      (prev: any[]) => {
-        // Verifica si prev es un array
-        if (!Array.isArray(prev)) {
-          return [{ value, label }];
-        }
-        return [...prev, { value, label }];
-      }
-    )
-    //close the options after the 400 ms
-    setTimeout(() => {
-      setSelectingItem(null);
-      setHoveredItemValue(null);
-      setIsDropdownOpen(false);
-      setDefaultValue({ value, label });
-    }, 400);
+  const handleDropdownSelect = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
-  // Sort the options alphabetically and handle the selected option
-  const sortOptions = () => {
-    let sortedList = [...options].sort((a, b) => a.label.localeCompare(b.label));
-    if (defaultValue) {
-      const index = sortedList.findIndex(option => option.label === defaultValue.label);
-      if (index > -1) {
-        const [selectedItem] = sortedList.splice(index, 1);
-        sortedList.unshift(selectedItem);
-      }
-    }
-    setSortedOptions(sortedList);
-  };
-  //handle click outside the container
   const handleClickOutside = (event: MouseEvent) => {
     if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
       setIsDropdownOpen(false);
     }
-  }
+  };
+
   useEffect(() => {
-    //add listerner on mount
     document.addEventListener('mousedown', handleClickOutside);
-    //clean listerner on unmount
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [containerRef]);
 
-  useEffect(() => {
-    if (isDropdownOpen && defaultValue) {
-      sortOptions(); //only puts the selected item at the top of the list when the dropdown is open again
-    } else {
-      setSortedOptions([...options].sort((a, b) => a.label.localeCompare(b.label)));
-    }
-  }, [options, isDropdownOpen, defaultValue]);
-
-  useEffect(() => {
-    // if the options are closed, blur the input to delete all :focus styles
-    if (!isDropdownOpen) {
-      inputRef.current?.blur();
-    }
-  }, [isDropdownOpen]);
-
   return (
-    <div className={`relative px-2 mt-5 bg-white ${formGroupWidth}`} ref={containerRef} >
-      <div className="form--group" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+    <div 
+      className={clsx(
+        'relative px-2 mt-5 bg-white',
+        formGroupWidth
+      )} 
+      ref={containerRef}
+    >
+      <div className="form--group" onClick={handleDropdownSelect}>
         <input
           type="text"
-          className={`input ${inputStyles}`}
+          className={clsx(
+            'input',
+            {
+              'input--disabled': isDisabled,
+              'input--error': isError,
+              'input--default': !isDisabled && !isError
+            }
+          )}
           placeholder=" "
-          value={selectedOption?.length > 0 ? selectedOption.map((option: OptionsType) => option.label).join(', ') : ''}
+          value={onValueJoin}
           readOnly
           id="custom-dropdown"
           ref={inputRef}
           disabled={isDisabled}
         />
-        {labelText && <label className={labelStyles} htmlFor="custom-dropdown">{labelText}</label>}
-        <div className={`right-2.5 absolute-center-y`}>
-          <ChevronUpIcon className={`${toggleIconInput} w-4 h-4 cursor-pointer`} />
+        {labelText && (
+          <label 
+            className={clsx(
+              'label',
+              {
+                'label--error': isError,
+                'label--default': !isError
+              }
+            )} 
+            htmlFor="custom-dropdown"
+          >
+            {labelText}
+          </label>
+        )}
+        <div className="right-2.5 absolute-center-y">
+          <HiChevronUp
+            className={clsx(
+              'w-4 h-4 cursor-pointer',
+              {
+                'rotate-0': isDropdownOpen,
+                'rotate-180 text-gray-600': !isDropdownOpen
+              }
+            )} 
+          />
         </div>
       </div>
-      {hintText && !isDropdownOpen && <span className={`mt-1 ml-1 | ${hintStyles} text-xs`}>{hintText}</span>}
-      {isDropdownOpen && (
-        <ul className="options scrollbar-hide">
-          {sortedOptions.length > 0
-            ? sortedOptions?.map((option, index) => {
-              const optionValue = option.value
-              const optionLabel = option.label
-              const isHoveredItem = hoveredItemValue === index //validate if the item by index is hover
-              const isCurrentItem = optionValue === selectedOption?.value && !selectingItem; //selected item by value 
-              const isSelectingItem = selectingItem?.value === optionValue && selectingItem.isSelecting; // selecting item, the current action of the user is doing
-              const isHoveringItem = isHoveredItem || isCurrentItem ? '3' : '2' //stroke width of the icon is the item is hovered or selected
-              const selectedItemStyles = isCurrentItem || isSelectingItem
-                ? `options__item--hovered  options__item justify-between ${option?.value && 'cursor-pointer'}`
-                : `options__item justify-between ${option?.value && 'cursor-pointer'}`;
-              const checkIconStyles = isCurrentItem || isSelectingItem // only show when item have been selected
-                ? 'w-4 h-4 text-green-600'
-                : 'hidden ';
-              return (
-                <li
-                  className={selectedItemStyles}
-                  key={`${optionValue}-${index}`}
-                  onClick={optionValue ? () => handleSelect(optionValue, optionLabel) : undefined} //handle the selection of the item and option value is not null
-                  onMouseEnter={() => setHoveredItemValue(index)}
-                  onMouseLeave={() => setHoveredItemValue(null)}
-                >
-                  <div className='justify-start'>
-                    <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem} />
-                    <span className="text-gray-900">{optionLabel}</span>
-                  </div>
-
-                  <CheckIncon className={checkIconStyles} />
-                </li>
-              )
-            })
-            : <li className='text-gray-300 flex-centered'>{emptyMessage}</li>}
-        </ul>
+      {hintText && !isDropdownOpen && (
+        <span
+          className={clsx(
+            'mt-1 ml-1 text-xs',
+            {
+              'text-error': isError,
+              'text-gray-600': !isError
+            }
+          )}
+        >
+          {hintText}
+        </span>
       )}
+
+      <ListDropdown
+        setSelectedOption={setSelectedOption}
+        selectedOption={selectedOption}
+        options={options}
+        inputRef={inputRef}
+        emptyMessage={emptyMessage}
+        isDropdownOpen={isDropdownOpen}
+        setIsDropdownOpen={setIsDropdownOpen}
+      />
     </div>
   );
 };
 
 export default DropdownSelector;
-

@@ -1,7 +1,7 @@
 @import './input.css';
 
 .label {
-  padding: 0 5px;
+  padding: 0 10px;
   pointer-events: none;
   transition: all 0.2s ease;
   font-weight: 400;
@@ -22,5 +22,5 @@
 }
 
 .label--error {
-  @apply text-red-500 label;
+  @apply text-danger label;
 }
