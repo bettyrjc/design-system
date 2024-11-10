@@ -44,7 +44,7 @@ const ContainedButton: React.FC<ContainedButtonProps> = ({
         color === 'secondary' && "bg-secondary text-white",
         color === 'info' && "bg-blue-600 text-white",
         color === 'error' && !disabled && 'bg-red-500 text-white',
-        color === 'gray' && !disabled && 'bg-gray-500 text-white',
+        color === 'gray' && !disabled && 'bg-gray-400 text-white',
         full && 'h-full w-full',
         roundedFull && 'rounded-full',
         !roundedFull && 'rounded-lg',
