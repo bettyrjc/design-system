@@ -17,12 +17,21 @@ const DropdownSelector = ({
   isError = false
 }: DropdownSelectorProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>('');
   const containerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const onValueJoin = selectedOption?.length > 0 ? selectedOption.map((option: OptionsType) => option.label).join(', ') : '';
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    if (!isDropdownOpen) {
+      setIsDropdownOpen(true);
+    }
+  };
 
   const handleDropdownSelect = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    if (!isDisabled) {
+      setIsDropdownOpen(!isDropdownOpen);
+    }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -38,6 +47,12 @@ const DropdownSelector = ({
     };
   }, [containerRef]);
 
+  useEffect(() => {
+    if (!isDropdownOpen && selectedOption?.length > 0) {
+      setInputValue(selectedOption.map((option: OptionsType) => option.label).join(', '));
+    }
+  }, [isDropdownOpen, selectedOption]);
+
   return (
     <div 
       className={clsx(
@@ -46,7 +61,7 @@ const DropdownSelector = ({
       )} 
       ref={containerRef}
     >
-      <div className="form--group" onClick={handleDropdownSelect}>
+      <div className="form--group">
         <input
           type="text"
           className={clsx(
@@ -58,8 +73,9 @@ const DropdownSelector = ({
             }
           )}
           placeholder=" "
-          value={onValueJoin}
-          readOnly
+          value={inputValue}
+          onChange={handleInputChange}
+          onClick={handleDropdownSelect}
           id="custom-dropdown"
           ref={inputRef}
           disabled={isDisabled}
@@ -81,15 +97,20 @@ const DropdownSelector = ({
         <div className="right-2.5 absolute-center-y">
           <HiChevronUp
             className={clsx(
-              'w-4 h-4 cursor-pointer',
+              'w-4 h-4',
               {
                 'rotate-0': isDropdownOpen,
-                'rotate-180 text-gray-600': !isDropdownOpen
+                'rotate-180': !isDropdownOpen,
+                'cursor-pointer': !isDisabled,
+                'cursor-not-allowed': isDisabled,
+                'text-gray-400': isDisabled,
+                'text-gray-600': !isDisabled
               }
             )} 
           />
         </div>
       </div>
+      
       {hintText && !isDropdownOpen && (
         <span
           className={clsx(
@@ -112,6 +133,7 @@ const DropdownSelector = ({
         emptyMessage={emptyMessage}
         isDropdownOpen={isDropdownOpen}
         setIsDropdownOpen={setIsDropdownOpen}
+        searchTerm={inputValue}
       />
     </div>
   );

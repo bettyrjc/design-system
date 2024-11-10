@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-lone-blocks */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import clsx from 'clsx';
 import { OptionsType, SelectingItem } from '../../../assets/types/options.types';
 import CheckIncon from '../../../assets/icons/CheckIncon';
 import UserRoundedIcon from '../../../assets/icons/UserRoundedIcon';
@@ -13,6 +13,7 @@ interface ListDropdownProps {
   emptyMessage: string;
   isDropdownOpen: boolean;
   setIsDropdownOpen: any;
+  searchTerm: string;
 }
 
 const ListDropdown = ({
@@ -22,16 +23,21 @@ const ListDropdown = ({
   selectedOption,
   emptyMessage,
   isDropdownOpen,
-  setIsDropdownOpen
+  setIsDropdownOpen,
+  searchTerm
 }: ListDropdownProps) => {
   const [sortedOptions, setSortedOptions] = useState<OptionsType[]>([]);
   const [selectingItem, setSelectingItem] = useState<SelectingItem | null>(null);
   const [hoveredItemValue, setHoveredItemValue] = useState<Number | null>(null);
   const [defaultValue, setDefaultValue] = useState<OptionsType | null>(null);
 
-  // Sort the options alphabetically and handle the selected option
-  const sortOptions = () => {
-    let sortedList = [...options].sort((a, b) => a.label.localeCompare(b.label));
+  const sortAndFilterOptions = () => {
+    let sortedList = [...options]
+      .sort((a, b) => a.label.localeCompare(b.label))
+      .filter(option => 
+        option.label.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
     if (defaultValue) {
       const index = sortedList.findIndex(option => option.label === defaultValue.label);
       if (index > -1) {
@@ -41,18 +47,16 @@ const ListDropdown = ({
     }
     setSortedOptions(sortedList);
   };
+
   const handleSelect = (value: string, label: string) => {
-    setSelectingItem({ isSelecting: true, value });  //set the selecting item to animate the selection
-    setSelectedOption(
-      (prev: any[]) => {
-        // Verifica si prev es un array
-        if (!Array.isArray(prev)) {
-          return [{ value, label }];
-        }
-        return [...prev, { value, label }];
+    setSelectingItem({ isSelecting: true, value });
+    setSelectedOption((prev: any[]) => {
+      if (!Array.isArray(prev)) {
+        return [{ value, label }];
       }
-    )
-    //close the options after the 400 ms
+      return [...prev, { value, label }];
+    });
+
     setTimeout(() => {
       setSelectingItem(null);
       setHoveredItemValue(null);
@@ -63,62 +67,72 @@ const ListDropdown = ({
 
   useEffect(() => {
     if (isDropdownOpen && defaultValue) {
-      sortOptions(); //only puts the selected item at the top of the list when the dropdown is open again
+      sortAndFilterOptions();
     } else {
-      setSortedOptions([...options].sort((a, b) => a.label.localeCompare(b.label)));
+      setSortedOptions(
+        [...options]
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .filter(option => 
+            option.label.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
     }
-  }, [options, isDropdownOpen, defaultValue]);
+  }, [options, isDropdownOpen, defaultValue, searchTerm]);
 
   useEffect(() => {
-    // if the options are closed, blur the input to delete all :focus styles
     if (!isDropdownOpen) {
       inputRef.current?.blur();
     }
   }, [isDropdownOpen]);
 
+  if (!isDropdownOpen) return null;
 
   return (
-    <>
-      {
-        isDropdownOpen && (
-          <ul className="options scrollbar-hide">
-            {sortedOptions.length > 0
-              ? sortedOptions?.map((option, index) => {
-                const optionValue = option.value
-                const optionLabel = option.label
-                const isHoveredItem = hoveredItemValue === index //validate if the item by index is hover
-                const isCurrentItem = optionValue === selectedOption?.value && !selectingItem; //selected item by value 
-                const isSelectingItem = selectingItem?.value === optionValue && selectingItem.isSelecting; // selecting item, the current action of the user is doing
-                const isHoveringItem = isHoveredItem || isCurrentItem ? '3' : '2' //stroke width of the icon is the item is hovered or selected
-                const selectedItemStyles = isCurrentItem || isSelectingItem
-                  ? `options__item--hovered  options__item justify-between ${option?.value && 'cursor-pointer'}`
-                  : `options__item justify-between ${option?.value && 'cursor-pointer'}`;
-                const checkIconStyles = isCurrentItem || isSelectingItem // only show when item have been selected
-                  ? 'w-4 h-4 text-green-600'
-                  : 'hidden ';
-                return (
-                  <li
-                    className={selectedItemStyles}
-                    key={`${optionValue}-${index}`}
-                    onClick={optionValue ? () => handleSelect(optionValue, optionLabel) : undefined} //handle the selection of the item and option value is not null
-                    onMouseEnter={() => setHoveredItemValue(index)}
-                    onMouseLeave={() => setHoveredItemValue(null)}
-                  >
-                    <div className='justify-start'>
-                      <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem} />
-                      <span className="text-gray-900">{optionLabel}</span>
-                    </div>
+    <ul className="options scrollbar-hide">
+      {sortedOptions.length > 0 ? (
+        sortedOptions.map((option, index) => {
+          const optionValue = option.value;
+          const optionLabel = option.label;
+          const isHoveredItem = hoveredItemValue === index;
+          const isCurrentItem = optionValue === selectedOption?.value && !selectingItem;
+          const isSelectingItem = selectingItem?.value === optionValue && selectingItem.isSelecting;
+          const isHoveringItem = isHoveredItem || isCurrentItem ? '3' : '2';
 
-                    <CheckIncon className={checkIconStyles} />
-                  </li>
-                )
-              })
-              : <li className='text-gray-300 flex-centered'>{emptyMessage}</li>}
-          </ul>
-        )
-      }
-    </>
-  )
-}
+          return (
+            <li
+              className={clsx(
+                'options__item justify-between',
+                {
+                  'options__item--hovered': isCurrentItem || isSelectingItem,
+                  'cursor-pointer': option?.value
+                }
+              )}
+              key={`${optionValue}-${index}`}
+              onClick={optionValue ? () => handleSelect(optionValue, optionLabel) : undefined}
+              onMouseEnter={() => setHoveredItemValue(index)}
+              onMouseLeave={() => setHoveredItemValue(null)}
+            >
+              <div className="justify-start">
+                <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem} />
+                <span className="text-gray-900">{optionLabel}</span>
+              </div>
+              <CheckIncon 
+                className={clsx(
+                  'w-4 h-4',
+                  {
+                    'text-green-600': isCurrentItem || isSelectingItem,
+                    'hidden': !isCurrentItem && !isSelectingItem
+                  }
+                )} 
+              />
+            </li>
+          );
+        })
+      ) : (
+        <li className="text-gray-300 flex-centered">{emptyMessage}</li>
+      )}
+    </ul>
+  );
+};
 
-export default ListDropdown
+export default ListDropdown;

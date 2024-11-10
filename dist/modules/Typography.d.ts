@@ -1,0 +1,24 @@
+import React from 'react';
+type As = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'p' | 'div';
+export type Color = 'white' | 'black' | 'gray-300' | 'gray-400' | 'gray-500' | 'gray-600' | 'gray-700' | 'gray-800' | 'zinc-500' | 'zinc-700' | 'violet-500' | 'primary' | 'primary-dark' | 'teal-400' | 'error' | 'info' | 'info-200' | 'info-500' | 'info-600' | 'secondary-500' | 'secondary-600' | 'secondary-700' | 'tertiary-500' | 'tertiary-600' | 'success' | 'amber-50' | 'yellow-500' | 'red-500' | 'green-500' | 'pink-500' | 'black' | 'orange-500' | 'coral-500';
+export type Size = '2xs' | 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
+export type FontWeight = 'thin' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
+type UnderlineOffset = 'auto' | 0 | 1 | 2 | 4 | 8;
+export type TypographyProps = {
+    children: React.ReactNode;
+    as?: As;
+    className?: string;
+    color?: Color;
+    fontWeight?: FontWeight;
+    size?: Size;
+    leading?: 'none' | 'normal' | 'tight' | 'loose';
+    italic?: boolean;
+    underline?: boolean;
+    uppercase?: boolean;
+    capitalize?: boolean;
+    inheritedColor?: boolean;
+    inheritedSize?: boolean;
+    underlineOffset?: UnderlineOffset;
+};
+declare const Typography: React.ForwardRefExoticComponent<TypographyProps & React.RefAttributes<HTMLElement>>;
+export default Typography;

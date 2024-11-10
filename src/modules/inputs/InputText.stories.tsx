@@ -56,13 +56,4 @@ export const InputTextEndIcon: Story = {
   },
   render: renderInputText,
 };
-export const InputTextStartIcon: Story = {
-  args: {
-    fullWidth: true,
-    disabled: false,
-    startIcon: <RiLockLine />,
-  },
-  render: renderInputText,
-};
-
 

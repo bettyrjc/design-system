@@ -1,8 +1,6 @@
 import React, { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import NumberInput from './NumberInput';
-import { RiLockLine } from 'react-icons/ri';
-// import { RiLockLine } from 'react-icons/ri';
 
 const meta: Meta<typeof NumberInput> = {
   title: "Input/NumberInput",
@@ -51,14 +49,6 @@ export const InputNumberError: Story = {
   render: renderInputText,
 };
 
-export const InputNumberStartIcon: Story = {
-  args: {
-    fullWidth: true,
-    disabled: false,
-    startIcon: <RiLockLine />,
-  },
-  render: renderInputText,
-};
 
 
 
