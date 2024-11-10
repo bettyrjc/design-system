@@ -120,21 +120,15 @@ function IconBase(props) {
 }
 
 // THIS FILE IS AUTO GENERATED
-function HiChevronUp (props) {
+function HiCheck (props) {
+  return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24","fill":"currentColor","aria-hidden":"true"},"child":[{"tag":"path","attr":{"fillRule":"evenodd","d":"M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z","clipRule":"evenodd"},"child":[]}]})(props);
+}function HiChevronUp (props) {
   return GenIcon({"tag":"svg","attr":{"viewBox":"0 0 24 24","fill":"currentColor","aria-hidden":"true"},"child":[{"tag":"path","attr":{"fillRule":"evenodd","d":"M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z","clipRule":"evenodd"},"child":[]}]})(props);
+}function HiOutlineUserCircle (props) {
+  return GenIcon({"tag":"svg","attr":{"fill":"none","viewBox":"0 0 24 24","strokeWidth":"1.5","stroke":"currentColor","aria-hidden":"true"},"child":[{"tag":"path","attr":{"strokeLinecap":"round","strokeLinejoin":"round","d":"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"},"child":[]}]})(props);
 }
 
 function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e)){var o=e.length;for(t=0;t<o;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f);}else for(f in e)e[f]&&(n&&(n+=" "),n+=f);return n}function clsx(){for(var e,t,f=0,n="",o=arguments.length;f<o;f++)(e=arguments[f])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}
-
-var CheckIncon = function (_a) {
-    var className = _a.className;
-    return (jsxRuntime.jsx("svg", __assign({ className: className, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, { children: jsxRuntime.jsx("polyline", { points: "20 6 9 17 4 12" }) })));
-};
-
-function UserRoundedIcon(_a) {
-    var className = _a.className, _b = _a.strokeWidth, strokeWidth = _b === void 0 ? "2" : _b;
-    return (jsxRuntime.jsx("svg", __assign({ className: className, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" }, { children: jsxRuntime.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: strokeWidth, d: "M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" }) })));
-}
 
 var ListDropdown = function (_a) {
     var setSelectedOption = _a.setSelectedOption, options = _a.options, inputRef = _a.inputRef, selectedOption = _a.selectedOption, emptyMessage = _a.emptyMessage, isDropdownOpen = _a.isDropdownOpen, setIsDropdownOpen = _a.setIsDropdownOpen, searchTerm = _a.searchTerm;
@@ -158,12 +152,7 @@ var ListDropdown = function (_a) {
     };
     var handleSelect = function (value, label) {
         setSelectingItem({ isSelecting: true, value: value });
-        setSelectedOption(function (prev) {
-            if (!Array.isArray(prev)) {
-                return [{ value: value, label: label }];
-            }
-            return __spreadArray(__spreadArray([], prev, true), [{ value: value, label: label }], false);
-        });
+        setSelectedOption({ value: value, label: label });
         setTimeout(function () {
             setSelectingItem(null);
             setHoveredItemValue(null);
@@ -200,8 +189,8 @@ var ListDropdown = function (_a) {
             return (jsxRuntime.jsxs("li", __assign({ className: clsx('options__item justify-between', {
                     'options__item--hovered': isCurrentItem || isSelectingItem,
                     'cursor-pointer': option === null || option === void 0 ? void 0 : option.value
-                }), onClick: optionValue ? function () { return handleSelect(optionValue, optionLabel); } : undefined, onMouseEnter: function () { return setHoveredItemValue(index); }, onMouseLeave: function () { return setHoveredItemValue(null); } }, { children: [jsxRuntime.jsxs("div", __assign({ className: "justify-start" }, { children: [jsxRuntime.jsx(UserRoundedIcon, { className: "w-4 h-4", strokeWidth: isHoveringItem }), jsxRuntime.jsx("span", __assign({ className: "text-gray-900" }, { children: optionLabel }))] })), jsxRuntime.jsx(CheckIncon, { className: clsx('w-4 h-4', {
-                            'text-green-600': isCurrentItem || isSelectingItem,
+                }), onClick: optionValue ? function () { return handleSelect(optionValue, optionLabel); } : undefined, onMouseEnter: function () { return setHoveredItemValue(index); }, onMouseLeave: function () { return setHoveredItemValue(null); } }, { children: [jsxRuntime.jsxs("div", __assign({ className: "justify-start" }, { children: [jsxRuntime.jsx(HiOutlineUserCircle, { className: "w-4 h-4", strokeWidth: isHoveringItem }), jsxRuntime.jsx("span", __assign({ className: "text-gray-900" }, { children: optionLabel }))] })), jsxRuntime.jsx(HiCheck, { className: clsx('w-4 h-4', {
+                            'text-success': isCurrentItem || isSelectingItem,
                             'hidden': !isCurrentItem && !isSelectingItem
                         }) })] }), "".concat(optionValue, "-").concat(index)));
         })) : (jsxRuntime.jsx("li", __assign({ className: "text-gray-300 flex-centered" }, { children: emptyMessage }))) })));
@@ -236,8 +225,8 @@ var DropdownSelector = function (_a) {
         };
     }, [containerRef]);
     React.useEffect(function () {
-        if (!isDropdownOpen && (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.length) > 0) {
-            setInputValue(selectedOption.map(function (option) { return option.label; }).join(', '));
+        if (!isDropdownOpen && selectedOption) {
+            setInputValue(selectedOption.label || '');
         }
     }, [isDropdownOpen, selectedOption]);
     return (jsxRuntime.jsxs("div", __assign({ className: clsx('relative px-2 mt-5 bg-white', formGroupWidth), ref: containerRef }, { children: [jsxRuntime.jsxs("div", __assign({ className: "form--group" }, { children: [jsxRuntime.jsx("input", { type: "text", className: clsx('input', {

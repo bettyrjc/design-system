@@ -2,17 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { OptionsType, SelectingItem } from '../../../assets/types/options.types';
-import CheckIncon from '../../../assets/icons/CheckIncon';
-import UserRoundedIcon from '../../../assets/icons/UserRoundedIcon';
+import { HiCheck, HiOutlineUserCircle } from 'react-icons/hi2';
 
 interface ListDropdownProps {
-  setSelectedOption: any;
-  selectedOption: any;
+  setSelectedOption: (option: OptionsType) => void;
+  selectedOption: OptionsType | null;
   options: OptionsType[];
-  inputRef: any;
+  inputRef: React.RefObject<HTMLInputElement>;
   emptyMessage: string;
   isDropdownOpen: boolean;
-  setIsDropdownOpen: any;
+  setIsDropdownOpen: (isOpen: boolean) => void;
   searchTerm: string;
 }
 
@@ -34,7 +33,7 @@ const ListDropdown = ({
   const sortAndFilterOptions = () => {
     let sortedList = [...options]
       .sort((a, b) => a.label.localeCompare(b.label))
-      .filter(option => 
+      .filter(option =>
         option.label.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
@@ -50,12 +49,7 @@ const ListDropdown = ({
 
   const handleSelect = (value: string, label: string) => {
     setSelectingItem({ isSelecting: true, value });
-    setSelectedOption((prev: any[]) => {
-      if (!Array.isArray(prev)) {
-        return [{ value, label }];
-      }
-      return [...prev, { value, label }];
-    });
+    setSelectedOption({ value, label });
 
     setTimeout(() => {
       setSelectingItem(null);
@@ -72,7 +66,7 @@ const ListDropdown = ({
       setSortedOptions(
         [...options]
           .sort((a, b) => a.label.localeCompare(b.label))
-          .filter(option => 
+          .filter(option =>
             option.label.toLowerCase().includes(searchTerm.toLowerCase())
           )
       );
@@ -97,7 +91,6 @@ const ListDropdown = ({
           const isCurrentItem = optionValue === selectedOption?.value && !selectingItem;
           const isSelectingItem = selectingItem?.value === optionValue && selectingItem.isSelecting;
           const isHoveringItem = isHoveredItem || isCurrentItem ? '3' : '2';
-
           return (
             <li
               className={clsx(
@@ -113,17 +106,18 @@ const ListDropdown = ({
               onMouseLeave={() => setHoveredItemValue(null)}
             >
               <div className="justify-start">
-                <UserRoundedIcon className="w-4 h-4" strokeWidth={isHoveringItem} />
+                <HiOutlineUserCircle className="w-4 h-4" strokeWidth={isHoveringItem} />
                 <span className="text-gray-900">{optionLabel}</span>
               </div>
-              <CheckIncon 
+
+              <HiCheck
                 className={clsx(
                   'w-4 h-4',
                   {
-                    'text-green-600': isCurrentItem || isSelectingItem,
+                    'text-success': isCurrentItem || isSelectingItem,
                     'hidden': !isCurrentItem && !isSelectingItem
                   }
-                )} 
+                )}
               />
             </li>
           );

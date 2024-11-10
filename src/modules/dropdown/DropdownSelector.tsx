@@ -48,8 +48,8 @@ const DropdownSelector = ({
   }, [containerRef]);
 
   useEffect(() => {
-    if (!isDropdownOpen && selectedOption?.length > 0) {
-      setInputValue(selectedOption.map((option: OptionsType) => option.label).join(', '));
+    if (!isDropdownOpen && selectedOption) {
+      setInputValue(selectedOption.label || '');
     }
   }, [isDropdownOpen, selectedOption]);
 
