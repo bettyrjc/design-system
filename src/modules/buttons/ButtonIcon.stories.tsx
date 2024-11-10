@@ -5,7 +5,7 @@ import IconButton from './IconButton';
 import { HiTrash } from 'react-icons/hi2';
 
 const meta: Meta<typeof IconButton> = {
-  title: "Icon Button",
+  title: "Button/Icon Button",
   component: IconButton,
 };
 

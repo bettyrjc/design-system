@@ -6,7 +6,7 @@ import { OptionsType } from '../../assets/types/options.types';
 // import { fn } from "@storybook/test";
 
 const meta: Meta<typeof SearchDropdown> = {
-  title: "SearchDropdown",
+  title: "Search/SearchDropdown",
   component: SearchDropdown,
 };
 

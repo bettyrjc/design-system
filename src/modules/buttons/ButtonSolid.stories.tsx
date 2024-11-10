@@ -4,7 +4,7 @@ import Button from './Button';
 import { RiEye2Line } from 'react-icons/ri';
 
 const meta: Meta<typeof Button> = {
-  title: "Button solid",
+  title: "Button/Button solid",
   component: Button,
 };
 

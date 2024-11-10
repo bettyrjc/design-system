@@ -3,10 +3,9 @@ import { Meta, StoryObj } from '@storybook/react';
 import DropdownSelector from "./DropdownSelector";
 import { userDataMock } from '../../assets/mocks/userDataMock';
 import { OptionsType } from '../../assets/types/options.types';
-// import { fn } from "@storybook/test";
 
 const meta: Meta<typeof DropdownSelector> = {
-  title: "DropdownSelector",
+  title: "Dropdown/DropdownSelector",
   component: DropdownSelector,
 };
 

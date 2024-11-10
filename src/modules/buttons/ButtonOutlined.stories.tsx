@@ -4,7 +4,7 @@ import Button from './Button';
 import { RiEye2Line } from 'react-icons/ri';
 
 const meta: Meta<typeof Button> = {
-  title: "Button outlined",
+  title: "Button/Button outlined",
   component: Button,
 };
 
