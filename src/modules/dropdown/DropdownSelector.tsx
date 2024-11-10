@@ -3,7 +3,7 @@ import { HiChevronUp } from 'react-icons/hi2';
 import clsx from 'clsx';
 
 import ListDropdown from './components/ListDropdown';
-import { DropdownSelectorProps, OptionsType } from '../../assets/types/options.types';
+import { DropdownSelectorProps } from '../../assets/types/options.types';
 
 const DropdownSelector = ({
   options,
@@ -106,11 +106,10 @@ const DropdownSelector = ({
                 'text-gray-400': isDisabled,
                 'text-gray-600': !isDisabled
               }
-            )} 
+            )}
           />
         </div>
       </div>
-      
       {hintText && !isDropdownOpen && (
         <span
           className={clsx(
