@@ -19,7 +19,7 @@ const renderRadio = (args: ComponentProps<typeof Radio>) => {
   );
 };
 
-export const CheckboxDefault: Story = {
+export const RadioDefault: Story = {
   args: {
     label: "Radio",
     centerRadio: false,
