@@ -1,5 +1,5 @@
 
-import React, { ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { Loader } from './Loader';
 

@@ -36,11 +36,17 @@ const Checkbox = forwardRef<HTMLInputElement, InputRatioProps>(function InputWit
             id={id}
             type="checkbox"
             className={clsx(
-              'form-checkbox h-4 w-4 cursor-pointer rounded bg-gray-100 focus:ring-2',
+              'appearance-none h-4 w-4 cursor-pointer rounded border-2 bg-white focus:ring-2 checked:bg-no-repeat checked:bg-center',
               hideCheckbox && 'hidden',
-              color === 'primary' && 'text-primary focus:ring-primary',
-              color === 'secondary' && 'text-secondary-500 focus:ring-secondary-500'
+              color === 'primary' && 'checked:bg-primary checked:border-primary focus:ring-primary ',
+              color === 'secondary' && 'checked:bg-secondary checked:border-secondary focus:ring-secondary ',
             )}
+            style={{
+              backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2716%27 height=%2716%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27white%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpolyline points=%2720 6 9 17 4 12%27%3E%3C/polyline%3E%3C/svg%3E")',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              backgroundSize: '14px'
+            }}
           />
         </div>
 

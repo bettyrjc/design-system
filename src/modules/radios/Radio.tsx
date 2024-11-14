@@ -8,10 +8,13 @@ export interface InputRatioProps extends InputHTMLAttributes<HTMLInputElement> {
   full?: boolean;
   hideRadio?: boolean;
   hint?: string;
+  color?: 'primary' | 'secondary';
 }
 
 const Radio = forwardRef<HTMLInputElement, InputRatioProps>(function InputWithRef(
-  { label = '', full = false, id, hint, name, value, onChange, centerRadio = false, hideRadio = false, ...props },
+  { label = '', full = false, id, hint, name, value, onChange, centerRadio = false, hideRadio = false,
+    color = 'primary',
+    ...props },
   ref
 ) {
   return (
@@ -25,7 +28,12 @@ const Radio = forwardRef<HTMLInputElement, InputRatioProps>(function InputWithRe
             type="radio"
             name={name}
             value={value}
-            className="w-4 h-4 bg-gray-100 border-2 cursor-pointer checked:rounded-full form-radio border-primary text-primary "
+            className={clsx(
+              'appearance-none h-4 w-4  rounded-full cursor-pointer border-2 bg-white focus:ring-2 checked:bg-no-repeat checked:bg-center',
+              hideRadio && 'hidden',
+              color === 'primary' && 'focus:ring-primary focus:ring-offset-2 checked:border-primary checked:bg-primary',
+              color === 'secondary' && 'focus:ring-secondary focus:ring-offset-2 checked:border-secondary checked:bg-secondary checked:ring-secondary',
+            )}
             onChange={(event) => {
               if (onChange) onChange(event);
             }}
