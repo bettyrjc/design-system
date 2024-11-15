@@ -10,7 +10,7 @@ export type Color =
   | 'info'
   | 'white';
 
-export type Variant = 'contained' | 'outlined' | 'outlined-special' | 'text';
+export type Variant = 'contained' | 'outlined';
 
 export type Size = 'normal' | 'small' | 'large' | 'medium';
 
@@ -40,7 +40,7 @@ const Button: React.FC<ButtonProps> = ({ variant = 'contained', onClick, type = 
     onClick?.(e);
   };
 
-  if (variant === 'outlined' || variant === 'outlined-special') {
+  if (variant === 'outlined' ) {
     return (
       <OutlinedButton type={type} {...props} onClick={handleClick}>
         {children}
