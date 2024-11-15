@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Button from './Button';
-import { RiEye2Line } from 'react-icons/ri';
+import { Eye } from 'lucide-react';
 
 const meta: Meta<typeof Button> = {
   title: "Button/Button solid",
@@ -42,7 +42,7 @@ export const IconButton: Story = {
   args: {
     size: "medium",
     color: "primary",
-    icon: <RiEye2Line />,
+    icon:<Eye />,
   },
   render: renderSolidButton,
 };
@@ -50,7 +50,7 @@ export const EndIconButton: Story = {
   args: {
     size: "medium",
     color: "primary",
-    endIcon: <RiEye2Line />,
+    endIcon: <Eye />,
   },
   render: renderSolidButton,
 };

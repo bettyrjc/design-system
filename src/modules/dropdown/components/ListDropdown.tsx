@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { OptionsType, SelectingItem } from '../../../assets/types/options.types';
-import { HiCheck, HiOutlineUserCircle } from 'react-icons/hi2';
+import { Check, CircleUserRound } from 'lucide-react';
 
 interface ListDropdownProps {
   setSelectedOption: (option: OptionsType) => void;
@@ -47,7 +47,7 @@ const ListDropdown = ({
     setSortedOptions(sortedList);
   };
 
-  const handleSelect = (value: string, label: string) => {
+  const handleSelect = (value: string | number, label: string) => {
     setSelectingItem({ isSelecting: true, value });
     setSelectedOption({ value, label });
 
@@ -106,11 +106,16 @@ const ListDropdown = ({
               onMouseLeave={() => setHoveredItemValue(null)}
             >
               <div className="justify-start">
-                <HiOutlineUserCircle className="w-4 h-4" strokeWidth={isHoveringItem} />
+                <CircleUserRound className="w-4 h-4" strokeWidth={isHoveringItem} />
                 <span className="text-gray-900">{optionLabel}</span>
               </div>
 
-              <HiCheck
+              <Check
+                size={12}
+                color={isCurrentItem || isSelectingItem ? 'var(--color-success)' : 'var(--color-white)'}
+              />
+
+              {/* <HiCheck
                 className={clsx(
                   'w-4 h-4',
                   {
@@ -118,7 +123,7 @@ const ListDropdown = ({
                     'hidden': !isCurrentItem && !isSelectingItem
                   }
                 )}
-              />
+              /> */}
             </li>
           );
         })

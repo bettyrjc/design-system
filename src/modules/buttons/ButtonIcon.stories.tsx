@@ -2,7 +2,8 @@ import React, { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 
 import IconButton from './IconButton';
-import { HiTrash } from 'react-icons/hi2';
+import { Trash2 } from 'lucide-react';
+
 
 const meta: Meta<typeof IconButton> = {
   title: "Button/Icon Button",
@@ -19,7 +20,7 @@ const renderIconButton = (args: ComponentProps<typeof IconButton>) => {
       variant="filled"
       // onClick={() => console.log("Clicked")}
       {...args}
-      icon={<HiTrash  />}
+      icon={<Trash2 size={24}/>}
     />
   );
 };

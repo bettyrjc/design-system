@@ -18,7 +18,7 @@ declare const LetterInput: React.ForwardRefExoticComponent<{
     width?: string | undefined;
     padding?: string | undefined;
     onChange?: ((e: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-} & Pick<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value" | "type" | "placeholder" | "onChange" | "disabled" | "name" | "onPaste" | "onKeyDown" | "onKeyPress" | "readOnly" | "maxLength" | "min" | "autoComplete" | "required" | "pattern"> & {
+} & Pick<React.InputHTMLAttributes<HTMLInputElement>, "defaultValue" | "value" | "min" | "name" | "type" | "onPaste" | "onChange" | "onKeyDown" | "onKeyPress" | "placeholder" | "disabled" | "readOnly" | "maxLength" | "autoComplete" | "required" | "pattern"> & {
     allowSpaces?: boolean | undefined;
 } & React.RefAttributes<HTMLInputElement>>;
 export default LetterInput;

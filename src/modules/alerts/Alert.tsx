@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { HiCheckCircle, HiExclamationCircle, HiInformationCircle, HiXCircle } from "react-icons/hi2";
+import { BadgeCheck, BadgeInfo, CircleAlert, X } from "lucide-react";
 
 type AlertType = {
   message: string;
@@ -13,16 +13,16 @@ const Alert = ({
 let icon;
 switch (type) {
     case 'info':
-      icon = <HiInformationCircle />
+      icon = <BadgeInfo />
       break;
     case 'warning':
-      icon = <HiExclamationCircle />
+      icon = <CircleAlert />
       break;
     case 'error':
-      icon = <HiXCircle />
+      icon = <X />
       break;
     case 'success':
-      icon = <HiCheckCircle />
+      icon = <BadgeCheck />
       break;
 }
   return (

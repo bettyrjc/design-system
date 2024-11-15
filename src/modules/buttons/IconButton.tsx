@@ -27,8 +27,8 @@ const IconButton: FC<IconButtonProps> = ({
         variant === 'filled' && color === 'primary' && 'bg-primary',
         variant === 'filled' && color === 'secondary' && 'bg-secondary',
         variant === 'filled' && color === 'tertiary' && 'bg-yellow-500',
-        size === 'small' && 'h-8 w-8  text-xs p-2.5',
-        size === 'normal' && 'h-12 w-12  text-xl p-3.5',
+        size === 'small' && 'p-2.5',
+        size === 'normal' && 'p-3.5',
       )}
       onClick={onClick}
     >

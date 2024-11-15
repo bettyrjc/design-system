@@ -1,6 +1,7 @@
 import clsx from 'clsx';
+import { AlignJustify, X } from 'lucide-react';
 import { useState } from 'react';
-import { HiMenu, HiX } from 'react-icons/hi';
+
 
 type HeaderProps = {
   logo: JSX.Element;
@@ -23,7 +24,7 @@ const Header = (
       )}>
         {logo}
         <button className="text-3xl text-primary md:bg-transparent md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          <HiMenu />
+          <AlignJustify />
         </button>
         <div className="hidden gap-4 text-lg font-medium lg:items-center lg:justify-end lg:w-1/2 text-primary lg:flex">
           {navLinks}
@@ -33,7 +34,7 @@ const Header = (
         <div className="fixed inset-0 z-50 pt-10 bg-white">
           <div className="absolute top-4 right-4">
             <button className="text-2xl text-primary" onClick={() => setMenuOpen(false)}>
-              <HiX />
+              <X />
             </button>
           </div>
           <div className="flex flex-col items-center justify-center text-lg font-medium text-primary">

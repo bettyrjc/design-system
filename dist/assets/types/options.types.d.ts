@@ -4,7 +4,7 @@ export type OptionsType = {
 };
 export type SelectingItem = {
     isSelecting: boolean;
-    value: string;
+    value: string | number;
 };
 export type DropdownSelectorProps = {
     name?: string;

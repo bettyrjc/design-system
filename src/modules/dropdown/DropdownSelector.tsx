@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { HiChevronUp } from 'react-icons/hi2';
 import clsx from 'clsx';
 
 import ListDropdown from './components/ListDropdown';
 import { DropdownSelectorProps } from '../../assets/types/options.types';
+import { ChevronUp } from 'lucide-react';
 
 const DropdownSelector = ({
   options,
@@ -95,7 +95,7 @@ const DropdownSelector = ({
           </label>
         )}
         <div className="right-2.5 absolute-center-y">
-          <HiChevronUp
+          <ChevronUp 
             className={clsx(
               'w-4 h-4',
               {

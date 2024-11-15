@@ -1,7 +1,8 @@
-import React, { ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import Input from './LetterInput';
-import { RiLockLine } from 'react-icons/ri';
+import { Lock } from 'lucide-react';
+
 
 const meta: Meta<typeof Input> = {
   title: "Input/LetterInput",
@@ -52,7 +53,7 @@ export const InputTextEndIcon: Story = {
   args: {
     fullWidth: true,
     disabled: false,
-    endIcon: <RiLockLine />,
+    endIcon: <Lock />,
   },
   render: renderInputText,
 };

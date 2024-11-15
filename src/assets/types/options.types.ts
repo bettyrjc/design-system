@@ -1,10 +1,11 @@
 export type OptionsType = {
   value: number | string | null;
   label: string;
-}
+};
 export type SelectingItem = {
-  isSelecting: boolean; value: string
-}
+  isSelecting: boolean;
+  value: string | number;
+};
 export type DropdownSelectorProps = {
   name?: string;
   options: OptionsType[];
@@ -14,6 +15,6 @@ export type DropdownSelectorProps = {
   emptyMessage?: string;
   isDisabled?: boolean;
   isError?: boolean;
-  selectedOption:any;
+  selectedOption: any;
   setSelectedOption: any;
-}
+};

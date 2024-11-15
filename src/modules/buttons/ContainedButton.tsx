@@ -2,7 +2,7 @@ import React from 'react';
 
 import clsx from 'clsx';
 import { ButtonProps } from './Button';
-import { RiLoader4Line } from 'react-icons/ri';
+import { Loader } from 'lucide-react';
 
 type ContainedButtonProps = ButtonProps;
 
@@ -61,7 +61,7 @@ const ContainedButton: React.FC<ContainedButtonProps> = ({
 
       {loading && (
         <div className="ml-1">
-          <RiLoader4Line className="w-6 h-6 animate-spin" />
+          <Loader  className="w-6 h-6 animate-spin" />
         </div>
       )}
     </button>

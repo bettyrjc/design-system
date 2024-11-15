@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, forwardRef, useState } from 'react';
 import clsx from 'clsx';
-import { HiOutlineEye, HiOutlineEyeOff } from 'react-icons/hi';
+import { Eye, EyeOff } from 'lucide-react';
 
 type ExposedNativeInputProps = 'placeholder' | 'value' | 'disabled' | 'readOnly' | 'onFocus';
 
@@ -14,15 +14,15 @@ export type InputProps = {
 } & Pick<InputHTMLAttributes<HTMLInputElement>, ExposedNativeInputProps>;
 
 const PasswordInput = forwardRef<HTMLInputElement, InputProps>(function InputWithRef(
-  { 
-    fullWidth = false, 
-    isInvalid, 
+  {
+    fullWidth = false,
+    isInvalid,
     disabled,
     label,
     error,
     hint,
-    placeholder, 
-    ...props 
+    placeholder,
+    ...props
   },
   ref
 ) {
@@ -48,7 +48,7 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(function InputWit
         />
 
         {label && (
-          <label 
+          <label
             className={clsx(
               'label',
               {
@@ -62,7 +62,7 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(function InputWit
         )}
 
         <div className="absolute right-2.5 top-1/2 -translate-y-1/2">
-          <div 
+          <div
             className={clsx(
               'flex items-center justify-center w-14',
               {
@@ -75,9 +75,9 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(function InputWit
             onClick={() => !disabled && setHiddenPassword(!hiddenPassword)}
           >
             {hiddenPassword ? (
-              <HiOutlineEyeOff className="w-6 h-6" />
+              <EyeOff size={24} />
             ) : (
-              <HiOutlineEye className="w-6 h-6" />
+              <Eye size={24} />
             )}
           </div>
         </div>
