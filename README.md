@@ -1,3 +1,17 @@
+# Instalación
+
+```
+ import 'musa-design-system/dist/index.cjs.css';
+ import {
+  Alert,
+  ContainedButton,
+  DropdownSelector,
+  LetterInput,
+  OutlinedButton,
+  PasswordInput,
+} from "musa-design-system";;
+```
+
 # Componentes Documentados
 
 ## 1. Buttons
@@ -35,13 +49,8 @@ Botones reutilizables con diferentes estilos y variantes.
 ### Ejemplo
 
 ```javascript
-<Button variant="solid" onClick={() => alert('Clicked!')}>
-  Solid Button
-</Button>
-
-<Button variant="outline" icon={<Icon name="edit" />} onClick={() => alert('Edit')}>
-  Edit
-</Button>
+  <OutlinedButton color="primary">Hola</OutlinedButton>
+  <ContainedButton color="primary">Hola</ContainedButton>
 ```
 
 ## 2. Input
@@ -109,26 +118,7 @@ Campos de entrada de texto con múltiples variantes y funcionalidad avanzada.
 />
 ```
 
-## 3. Títulos
-
-Estilos predefinidos para encabezados.
-
-### Props
-
-| Propiedad | Tipo     | Descripción                            |
-| --------- | -------- | -------------------------------------- |
-| `level`   | `number` | Nivel del título (1-6)                 |
-| `align`   | `string` | Alineación (`left`, `center`, `right`) |
-
-### Ejemplo
-
-```javascript
-<Title level={1} align="center">
-  Mi encabezado principal
-</Title>
-```
-
-## 4. Card
+## 3. Card
 
 Componente para contener contenido con sombra, bordes redondeados y tamaños configurables.
 
@@ -146,12 +136,12 @@ Componente para contener contenido con sombra, bordes redondeados y tamaños con
 ### Ejemplo
 
 ```javascript
-<Card shadow rounded size="medium">
+<Card center bordered padding="large">
   Este es un card con sombra y bordes redondeados.
 </Card>
 ```
 
-## 5. Alert
+## 4. Alert
 
 Mensajes informativos con diferentes estilos.
 
@@ -169,7 +159,7 @@ Mensajes informativos con diferentes estilos.
 <Alert type="error" message="Ha ocurrido un error." />
 ```
 
-## 6. Checkbox y Radio
+## 5. Checkbox y Radio
 
 ### Props de Radio
 
@@ -197,11 +187,28 @@ Mensajes informativos con diferentes estilos.
 ### Ejemplo
 
 ```javascript
-<Checkbox label="Acepto los términos y condiciones" />
-<Radio name="gender" value="male" label="Masculino" />
+    <Checkbox label="Acepto los términos y condiciones" />
+    <div className="flex flex-col gap-4">
+      <Radio
+        label="Option 1"
+        name="radioGroup"
+        value="option1"
+        checked={selected === 'option1'}
+        onChange={() => setSelected('option1')}
+        color='primary'
+      />
+      <Radio
+        label="Option 2"
+        name="radioGroup"
+        value="option2"
+        checked={selected === 'option2'}
+        onChange={() => setSelected('option2')}
+        color='secondary'
+      />
+    </div>
 ```
 
-## 7. Loader
+## 6. Loader
 
 ### Props
 
@@ -215,7 +222,7 @@ Mensajes informativos con diferentes estilos.
 <Loader label="Cargando componentes..." />
 ```
 
-## 8. DropdownSelector
+## 7. DropdownSelector
 
 ### Props
 
@@ -231,7 +238,7 @@ Mensajes informativos con diferentes estilos.
 | `isDisabled`        | `boolean`                                 | Desactiva el dropdown              |
 | `isError`           | `boolean`                                 | Indica estado de error             |
 
-## 9. Header
+## 8. Header
 
 ### Props
 
