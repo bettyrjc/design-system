@@ -3,7 +3,7 @@ declare module 'musa-design-system' {
   import * as React from 'react';
 
   export interface OptionsType {
-    value: string | null;
+    value: number | string | null;
     label: string;
   }
 

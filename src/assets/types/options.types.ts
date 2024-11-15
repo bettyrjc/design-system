@@ -1,5 +1,5 @@
 export type OptionsType = {
-  value: string | null;
+  value: number | string | null;
   label: string;
 }
 export type SelectingItem = {
