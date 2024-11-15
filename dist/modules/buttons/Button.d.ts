@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from 'react';
 export type Color = 'primary' | 'secondary' | 'error' | 'gray' | 'info' | 'white';
-export type Variant = 'contained' | 'outlined' | 'outlined-special' | 'text';
+export type Variant = 'contained' | 'outlined';
 export type Size = 'normal' | 'small' | 'large' | 'medium';
 export type ButtonProps = {
     variant?: Variant;
