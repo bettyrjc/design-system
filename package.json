@@ -1,7 +1,7 @@
 {
   "name": "musa-design-system",
-  "author": "Betty",
-  "version": "2.0.2",
+  "author": "Bet",
+  "version": "2.0.3",
   "private": false,
   "type": "module",
   "main": "dist/index.cjs.js",
